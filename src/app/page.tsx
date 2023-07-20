@@ -1,3 +1,4 @@
+import { ProductCard } from '@/components/ui';
 import { BooksOrderBy, SortBy, StorefrontBooksFilters } from '@/interfaces';
 import { getStorefrontBooks } from '@/services';
 
@@ -25,7 +26,7 @@ export default async function Home({ searchParams }: {
   return (
     <main>
       {books.map((book) => (
-        <p key={ book.id }>{ book.title }</p>
+        <ProductCard key={ book.id } book={ book } />
       ))}
     </main>
   );
