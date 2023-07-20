@@ -1,3 +1,12 @@
 {
-  "extends": "next/core-web-vitals"
+  "extends": "next/core-web-vitals",
+  "rules": {
+    "jsx-quotes": "error",
+    "eol-last": ["error", "always"],
+    "semi": ["error", "always"],
+    "indent": ["error", 2],
+    "quotes": ["error", "single"],
+    "object-curly-spacing": ["error", "always"],
+    "react/jsx-curly-spacing": ["error", "always"]
+  }
 }
