@@ -14,7 +14,9 @@ export const getStorefrontBooks = async({
   sortBy = 'desc', 
   filters = undefined 
 }: GetStorefrontBooksParams): Promise<GetStorefrontBookData> => {
-  const BASE_API_URL = process.env.BASE_API_URL as string;
+  const BASE_API_URL = process.env.NODE_ENV === 'development' 
+    ? process.env.BASE_API_URL_DEV as string
+    : process.env.BASE_API_URL_URL as string;
 
   try {
     const { data } = await axios.get(`${BASE_API_URL}/storefront/books`, {
