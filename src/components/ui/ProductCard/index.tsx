@@ -4,9 +4,9 @@ import { Book } from '@/interfaces';
 
 export const ProductCard = ({ book }: { book: Book }) => {
   return (
-    <article className="flex flex-col min-w-0 relative group flex-shrink-0 xl:flex-[1_1]" style={ { width: '275px' } }>
+    <article className="flex flex-col min-w-0 relative group flex-shrink-0 xl:flex-[1_1]" style={ { width: 'auto' } }>
       <div className="relative">
-        <Link href={ `/products/${ book.title }` }>
+        <Link href={ `/products/${ book.slug }` }>
           <div className="relative w-full h-full pt-[119%] overflow-hidden rounded-[1rem] bg-gray-100">
             <Image
               src={ book.image }
@@ -18,7 +18,9 @@ export const ProductCard = ({ book }: { book: Book }) => {
         </Link> 
       </div>
       <div className="p-3">
-        <h4 className="leading-[1.3em] text-[0.925rem]">{ book.title }</h4>
+        <Link href={ `/products/${ book.slug }` }>
+          <h4 className="leading-[1.3em] text-[0.925rem]">{ book.title }</h4>
+        </Link>
         <p className="text-gray-400 text-sm my-1">
           { book.authors.map(author => (
             <span key={ author.id }>{ author.name }</span>
