@@ -12,7 +12,18 @@ module.exports = {
         'gradient-conic':
           'conic-gradient(from 180deg at 50% 50%, var(--tw-gradient-stops))',
       },
+      colors: {
+        'gray-alpha': {
+          100: 'hsla(0,0%,100%,.06)',
+          200: 'hsla(0,0%,100%,.09)',
+          300: 'hsla(0,0%,100%,.13)',
+          400: 'hsla(0,0%,100%,.17)',
+          500: 'hsla(0,0%,100%,.24)',
+          600: 'hsla(0,0%,100%,.51)',
+          700: 'hsla(0,0%,100%,.54)',
+        }
+      }
     },
   },
   plugins: [],
-}
+};
