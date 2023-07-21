@@ -3,6 +3,7 @@ export interface Book {
   title:       string;
   description: string;
   price:       number;
+  slug:        string;
   image:       string;
   stock:       number;
   createdAt:   Date;
