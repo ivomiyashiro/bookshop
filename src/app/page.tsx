@@ -1,13 +1,13 @@
-import { ProductCard } from '@/components/ui';
 import { BooksOrderBy, SortBy, StorefrontBooksFilters } from '@/interfaces';
 import { getStorefrontBooks } from '@/services';
+import { Hero, BooksList } from '@/components/sections';
 
 interface SearchParams {
   limit?: string;
   offset?: string; 
   orderBy?: string; 
   sortBy?: string; 
-  filters?: string;
+  filters?: StorefrontBooksFilters;
 }
 
 export default async function Home({ searchParams }: {
@@ -24,10 +24,9 @@ export default async function Home({ searchParams }: {
   });
 
   return (
-    <main>
-      {books.map((book) => (
-        <ProductCard key={ book.id } book={ book } />
-      ))}
+    <main className="px-4 lg:px-6">
+      <Hero searchText={ filters?.searchText } />
+      <BooksList books={ books } view="GRID" />
     </main>
   );
 }
