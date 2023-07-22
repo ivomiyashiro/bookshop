@@ -3,3 +3,4 @@ export * from './Button';
 export * from './MainLogo';
 export * from './Header';
 export * from './Spinner';
+export * from './InputSelect';
