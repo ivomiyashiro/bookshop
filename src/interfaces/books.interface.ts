@@ -21,3 +21,5 @@ export interface Languages {
   id: number;
   name: string;
 }
+
+export type SortValues = 'HIGHER PRICE' | 'LOWER PRICE' | 'A - Z' | 'Z - A' | 'NEWER' | 'OLDER';
