@@ -1,2 +1,2 @@
-export * from './Hero';
-export * from './BooksList';
+export * from './BooksCatalog';
+export * from './Header';

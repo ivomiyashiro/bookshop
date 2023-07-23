@@ -1,10 +1,9 @@
 import { BooksOrderBy, SortBy, StorefrontBooksFilters } from '@/interfaces';
 import { getStorefrontBooks } from '@/services';
-import { Hero, BooksList } from '@/components/sections';
+import { CatalogProvider } from '@/context/catalog';
+import { BooksCatalog, Header } from '@/components/sections/landing';
 
 interface SearchParams {
-  limit?: string;
-  offset?: string; 
   orderBy?: string; 
   sortBy?: string; 
   filters?: StorefrontBooksFilters;
@@ -13,20 +12,24 @@ interface SearchParams {
 export default async function Home({ searchParams }: {
   searchParams: SearchParams;
 }) {
-  const { limit, offset, orderBy, sortBy, filters } = searchParams;
+  const { orderBy, sortBy, filters } = searchParams;
 
-  const { books } = await getStorefrontBooks({
-    limit: parseInt(limit as string) || undefined,
-    offset: parseInt(offset as string) || undefined,
+  const params = {
     orderBy: orderBy as unknown as BooksOrderBy,
     sortBy: sortBy as unknown as SortBy,
-    filters: filters as unknown as StorefrontBooksFilters
-  });
+    filters: filters 
+      ? JSON.parse(decodeURIComponent(filters as string)) as any
+      : undefined
+  };
+
+  const { books } = await getStorefrontBooks(params);
 
   return (
     <main className="px-4 lg:px-6">
-      <Hero searchText={ filters?.searchText } />
-      <BooksList books={ books } view="GRID" />
+      <CatalogProvider data={ { books, params } }>
+        <Header />
+        <BooksCatalog />
+      </CatalogProvider>
     </main>
   );
 }
