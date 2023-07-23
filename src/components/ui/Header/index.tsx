@@ -6,7 +6,7 @@ export const Header = () => {
     <header className="w-full h-[62px] flex items-center shadow-[inset_0_-1px_0_0_hsla(0,0%,100%,.1)]">
       <div className="px-4 lg:px-6 flex items-center justify-between w-full">
         <div>
-          <MainLogo size={ 36 } />
+          <MainLogo size={ 36 } isLink />
         </div>
         <div>
           <ul className="flex gap-3">
