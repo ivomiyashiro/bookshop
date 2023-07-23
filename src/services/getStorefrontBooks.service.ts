@@ -1,5 +1,6 @@
 import axios, { AxiosError } from 'axios';
 import { GetStorefrontBooksParams, Book } from '@/interfaces';
+import { config } from '@/config';
 
 interface GetStorefrontBookData {
   books:      Book[];
@@ -14,10 +15,8 @@ export const getStorefrontBooks = async({
   sortBy = 'desc', 
   filters = undefined 
 }: GetStorefrontBooksParams): Promise<GetStorefrontBookData> => {
-  const BASE_API_URL = process.env.NODE_ENV === 'development' 
-    ? process.env.BASE_API_URL_DEV as string
-    : process.env.BASE_API_URL_URL as string;
-
+  const { BASE_API_URL } = config;
+  
   try {
     const { data } = await axios.get(`${BASE_API_URL}/storefront/books`, {
       params: {
@@ -38,9 +37,9 @@ export const getStorefrontBooks = async({
     };
   } catch (error) {
     if (error instanceof AxiosError) {
-      throw new Error(error.message);  
+      throw new Error(error.response?.data.message);
     }
 
-    throw new Error('Failed to fetch storefront books');
+    throw new Error('Failed to fetch books');
   }
 };
