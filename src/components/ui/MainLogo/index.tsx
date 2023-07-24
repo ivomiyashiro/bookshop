@@ -6,7 +6,7 @@ interface Props {
   size?: number;
 }
 
-export const MainLogo = ({ size = 32, isLink = false }: Props) => {
+const MainLogo = ({ size = 32, isLink = false }: Props) => {
   if (isLink) {
     return (
       <Link href="/">
@@ -22,3 +22,5 @@ export const MainLogo = ({ size = 32, isLink = false }: Props) => {
     </div>
   );
 };
+
+export default MainLogo;

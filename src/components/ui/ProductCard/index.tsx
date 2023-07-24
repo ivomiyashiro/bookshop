@@ -1,8 +1,9 @@
+import { memo } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
 import { Book } from '@/interfaces';
 
-export const ProductCard = ({ book }: { book: Book }) => {
+const ProductCard = ({ book }: { book: Book }) => {
   return (
     <article className="flex flex-col min-w-0 relative group flex-shrink-0 xl:flex-[1_1]" style={ { width: 'auto' } }>
       <div className="relative">
@@ -31,3 +32,6 @@ export const ProductCard = ({ book }: { book: Book }) => {
     </article>
   );
 };
+
+
+export default memo(ProductCard);

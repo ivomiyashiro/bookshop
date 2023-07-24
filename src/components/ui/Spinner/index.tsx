@@ -4,7 +4,7 @@ interface Props {
   contrast?: boolean;
 }
 
-export const Spinner = ({ width = 'w-8', height = 'h-8', contrast = false }: Props) => {
+const Spinner = ({ width = 'w-8', height = 'h-8', contrast = false }: Props) => {
   return (
     <div role="status" className={ `${width} ${height}` }>
       <svg aria-hidden="true" className={ `w-full h-full mr-2 text-gray-300 animate-spin dark:text-gray-300 ${ contrast ? 'fill-black' : 'fill-white' }` } viewBox="0 0 100 101" fill="none">
@@ -15,3 +15,5 @@ export const Spinner = ({ width = 'w-8', height = 'h-8', contrast = false }: Pro
     </div>
   );
 };
+
+export default Spinner;
