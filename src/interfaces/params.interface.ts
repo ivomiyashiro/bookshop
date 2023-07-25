@@ -2,7 +2,7 @@ export interface GetStorefrontBooksParams {
   limit?: number;
   offset?: number;
   orderBy?: BooksOrderBy;
-  sortBy?: SortBy;
+  sortBy?: BooksSortBy;
   filters?: StorefrontBooksFilters;
 }
 
@@ -18,5 +18,5 @@ export interface StorefrontBooksFilters {
 
 export type BooksOrderBy = 'title' | 'createdAt' | 'price';
 
-export type SortBy = 'asc' | 'desc';
+export type BooksSortBy = 'asc' | 'desc';
 
