@@ -1,7 +1,11 @@
-import { BooksOrderBy, SortBy, StorefrontBooksFilters } from '@/interfaces';
+import { BooksOrderBy, BooksSortBy, StorefrontBooksFilters } from '@/interfaces';
+
 import { getStorefrontBooks } from '@/services';
-import { CatalogProvider } from '@/context/catalog';
-import { BooksCatalog, Header } from '@/components/sections/landing';
+
+import { CatalogProvider } from '@/contexts/catalog';
+
+import { ClientLayout } from '@/components/layouts';
+import { BooksCatalog, Header } from '@/components/sections/(main)';
 
 interface SearchParams {
   orderBy?: string; 
@@ -16,7 +20,7 @@ export default async function Home({ searchParams }: {
 
   const params = {
     orderBy: orderBy as unknown as BooksOrderBy,
-    sortBy: sortBy as unknown as SortBy,
+    sortBy: sortBy as unknown as BooksSortBy,
     filters: filters 
       ? JSON.parse(decodeURIComponent(filters as string)) as any
       : undefined
@@ -25,11 +29,11 @@ export default async function Home({ searchParams }: {
   const { books } = await getStorefrontBooks(params);
 
   return (
-    <main className="px-4 lg:px-6">
-      <CatalogProvider data={ { books, params } }>
+    <CatalogProvider data={ { books, params } }>
+      <ClientLayout>
         <Header />
         <BooksCatalog />
-      </CatalogProvider>
-    </main>
+      </ClientLayout>
+    </CatalogProvider>
   );
 }
