@@ -44,7 +44,7 @@ const FiltersMenu = ({ open, handleOpen }: Props) => {
           </div>
           <Button
             style="PRIMARY" 
-            className="m-5 rounded-lg !text-lg !font-bold py-4" 
+            className="m-5 rounded-lg !text-lg !font-bold py-4 disabled:opacity-0 disabled:cursor-default transition" 
             disabled={ !(URLParams.has('price') || URLParams.has('authors') || URLParams.has('languages')) } 
             onClick={ resetURLParams }
           >
