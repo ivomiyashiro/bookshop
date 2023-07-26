@@ -3,17 +3,10 @@ export interface GetStorefrontBooksParams {
   offset?: number;
   orderBy?: BooksOrderBy;
   sortBy?: BooksSortBy;
-  filters?: StorefrontBooksFilters;
-}
-
-export interface StorefrontBooksFilters {
   searchText?: string;
   languages?: string[];
   authors?: string[];
-  price?: {
-    max?: number;
-    min?: number;
-  }
+  price?: string;
 }
 
 export type BooksOrderBy = 'title' | 'createdAt' | 'price';

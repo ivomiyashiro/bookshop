@@ -1,6 +1,8 @@
-import { Dispatch, SetStateAction } from 'react';
+import { Dispatch, SetStateAction, useContext } from 'react';
 import { Button, Modal } from '@/components/ui';
 import { XMarkIcon, FunnelIcon } from '@heroicons/react/24/outline';
+import { CatalogContext } from '@/contexts/catalog';
+import Filter from './Filter';
 
 interface Props {
   open: boolean;
@@ -8,6 +10,8 @@ interface Props {
 }
 
 const FiltersMenu = ({ open, handleOpen }: Props) => {
+  const { filters, URLParams, resetURLParams } = useContext(CatalogContext);
+
   return (
     <Modal open={ open } handleOpen={ handleOpen }>
       <aside className={ `fixed top-0 right-0 h-screen bg-gray-900 z-50 md:rounded-l-2xl transition-all overflow-hidden ${ open ? 'w-full lg:w-[470px]' : 'w-[0px]' }` }>
@@ -29,12 +33,20 @@ const FiltersMenu = ({ open, handleOpen }: Props) => {
             </Button>
           </div>
           <div className="p-4 pt-2 h-full flex flex-col overflow-y-scroll scrollbar-hidden">
-
+            { filters.map(filter => (
+              <Filter 
+                key={ filter.id }
+                filterId={ filter.id }
+                name={ filter.name }
+                values={ filter.data }
+              />
+            ))}
           </div>
           <Button
             style="PRIMARY" 
             className="m-5 rounded-lg !text-lg !font-bold py-4" 
-            disabled={ true } 
+            disabled={ !(URLParams.has('price') || URLParams.has('authors') || URLParams.has('languages')) } 
+            onClick={ resetURLParams }
           >
             RESET FILTERS
           </Button>

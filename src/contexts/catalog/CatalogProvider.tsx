@@ -2,28 +2,17 @@
 import { FC, useEffect, useReducer } from 'react';
 import { useRouter } from 'next/navigation';
 
-import { BooksOrderBy, BooksSortBy, SortValues } from '@/interfaces';
+import { SortValues } from '@/interfaces';
 import { CatalogProviderProps } from './types';
 
-import { getSortingParams } from '@/utils';
+import { getCatalogInitState, getSortingParams } from '@/utils';
 
-import { CatalogContext, catalogReducer } from '.';
+import { CatalogContext, catalogReducer } from './';
 
 const CatalogProvider: FC<CatalogProviderProps> = ({ children, data }) => {
-  const [state, dispatch] = useReducer(catalogReducer, {
-    books: {
-      data: data.books,
-      loading: false,
-    },
-    params: {
-      orderBy: 'createdAt',
-      sortBy: 'desc',
-      filters: {},
-      ...data.params
-    },
-    view: 'GRID'
-  });
+  const [state, dispatch] = useReducer(catalogReducer, getCatalogInitState(data));
   const router = useRouter();
+
 
   useEffect(() => {
     dispatch({
@@ -32,58 +21,132 @@ const CatalogProvider: FC<CatalogProviderProps> = ({ children, data }) => {
     });
   }, [data.books]);
 
-  const changeSortingBooks = ({ orderBy, sortBy }: { 
-    orderBy: BooksOrderBy, 
-    sortBy: BooksSortBy 
-  }) => dispatch({
-    type: '[CATALOG] - CHANGE SORTING',
-    payload: {
-      orderBy,
-      sortBy
-    }
-  });
+
+  const toggleView = () => dispatch({ type: '[CATALOG] - TOGGLE VIEW' });
   
+
   const changeSearchText = (value: string) => dispatch({
     type: '[CATALOG] - CHANGE SEARCH TEXT',
     payload: value
   });
 
+
   const sortBooks = async (value: SortValues) => {
-    const sortParams = getSortingParams(value);
+    const { orderBy, sortBy } = getSortingParams(value);
 
-    const encodedFilters = encodeURIComponent(JSON.stringify({
-      ...state.params.filters,
-    }));
+    state.URLParams.set('orderBy', orderBy);
+    state.URLParams.set('sortBy', sortBy);
 
-    const URLParams = new URLSearchParams({ 
-      ...sortParams, 
-      filters: encodedFilters
-    } as any).toString();
+    dispatch({
+      type: '[CATALOG] - CHANGE SORTING',
+      payload: {
+        orderBy,
+        sortBy
+      }
+    });
 
-    changeSortingBooks(sortParams);
-
-    const adaptedURLParams = URLParams.replaceAll('%25', '%');
-    router.push(`${window.location.pathname}?${adaptedURLParams}`);
+    router.push(`${window.location.pathname}?${state.URLParams}`);
   };
+
 
   const searchBook = async (value: string) => {
-    const encodedFilters = encodeURIComponent(JSON.stringify({
-      ...state.params.filters,
-      searchText: value
-    }));
+    state.URLParams.delete('searchText');
+    
+    if (value !== '') {
+      state.URLParams.set('searchText', value);
+    }
 
-    const URLParams = new URLSearchParams({
-      ...state.params,
-      filters: encodedFilters
-    } as any).toString();
-
-    changeSearchText(value);
-
-    const adaptedURLParams = URLParams.replaceAll('%25', '%');
-    router.push(`${window.location.pathname}?${adaptedURLParams}`);
+    router.push(`${window.location.pathname}?${state.URLParams}`);
   };
 
-  const toggleView = () => dispatch({ type: '[CATALOG] - TOGGLE VIEW' });
+
+  const resetURLParams = () => {
+    state.URLParams.delete('price');
+    state.URLParams.delete('authors');
+    state.URLParams.delete('languages');
+
+    dispatch({
+      type: '[CATALOG] - TOGGLE FILTER CHECKBOX',
+      payload: { 
+        updatedFilters: [
+          ...state.filters.map(filter => {
+            return {
+              ...filter,
+              data: filter.data.map(filterItem => {
+                return {
+                  ...filterItem,
+                  checked: false
+                };
+              })
+            };
+          })
+        ] }
+    });
+
+    router.push(window.location.pathname);
+  };
+
+
+  const toggleFilterCheckbox = (filterId: number, id: number) => {
+    dispatch({
+      type: '[CATALOG] - TOGGLE FILTER CHECKBOX',
+      payload: { 
+        updatedFilters: [
+          ...state.filters.map(filter => {
+            if (filterId !== filter.id) return filter;
+  
+            return {
+              ...filter,
+              data: filter.data.map(filterItem => {
+                if (id !== filterItem.id) return filterItem;
+
+                updateURLParams(filter, filterItem);
+
+                return {
+                  ...filterItem,
+                  checked: !filterItem.checked
+                };
+              })
+            };
+          })
+        ] }
+    });
+
+    router.push(`${window.location.pathname}?${state.URLParams}`);
+  };
+
+
+  const updateURLParams = (filter: { id: number; name: string; data: any; }, filterItem: { id: number; name: string; checked: boolean }) => {
+    const filterName = filter.name.toLowerCase();
+    const filterValue = filterName !== 'price' ? filterItem.name.toLowerCase() : filterItem.name.replace(/[\$\s]/g, '');
+    const existsInURLParams = state.URLParams.has(filterName);
+    // if filter not exists in url appends it
+    if (!existsInURLParams) {
+      return state.URLParams.append(
+        filterName,
+        filterValue
+      );
+    }
+    // if filter exists in url and want to add another of same type appends it
+    if (!filterItem.checked) {
+      return state.URLParams.set(
+        filterName,
+        [state.URLParams.get(filterName), filterValue].join(',')
+      );
+    } 
+    // if filter exists in url and want to remove it
+    const prevFilters = state.URLParams.get(filterName)?.toString() as string;
+    const updatedFilters = prevFilters.split(',').filter(f => f !== filterValue);
+
+    if (updatedFilters.length !== 0) {
+      return state.URLParams.set(
+        filterName,
+        updatedFilters.join(',')
+      );
+    } 
+    // remove the filter from url
+    state.URLParams.delete(filterName);
+  };
 
   return (
     <CatalogContext.Provider value={ {
@@ -93,7 +156,9 @@ const CatalogProvider: FC<CatalogProviderProps> = ({ children, data }) => {
       changeSearchText,
       sortBooks,
       searchBook,
-      toggleView
+      toggleFilterCheckbox,
+      toggleView,
+      resetURLParams
     } }>
       { children }
     </CatalogContext.Provider>

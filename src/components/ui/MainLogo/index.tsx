@@ -1,4 +1,3 @@
-import Link from 'next/link';
 import { BookOpenIcon } from '@heroicons/react/24/solid';
 
 interface Props {
@@ -9,11 +8,11 @@ interface Props {
 const MainLogo = ({ size = 32, isLink = false }: Props) => {
   if (isLink) {
     return (
-      <Link href="/">
+      <a href="/">
         <div className="flex items-center">
           <BookOpenIcon height={ size } width={ size } />
         </div>
-      </Link>
+      </a>
     );
   }
   return (

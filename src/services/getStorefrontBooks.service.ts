@@ -13,10 +13,13 @@ export const getStorefrontBooks = async({
   offset = 0, 
   orderBy = 'createdAt', 
   sortBy = 'desc', 
-  filters = undefined 
+  languages,
+  authors,
+  price,
+  searchText,
 }: GetStorefrontBooksParams): Promise<GetStorefrontBookData> => {
   const { BASE_API_URL } = config;
-  
+
   try {
     const { data } = await axios.get(`${BASE_API_URL}/storefront/books`, {
       params: {
@@ -24,7 +27,10 @@ export const getStorefrontBooks = async({
         offset,
         orderBy,
         sortBy,
-        filters
+        languages,
+        authors,
+        price,
+        searchText,
       }
     });
 

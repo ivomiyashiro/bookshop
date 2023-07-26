@@ -16,16 +16,14 @@ const useSearchbar = (handleOpen: Dispatch<SetStateAction<boolean>> | null) => {
 
   const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    searchBook(params.filters?.searchText || '');
-    if (handleOpen) {
-      handleOpen(false);
-    }
+    searchBook(params?.searchText || '');
+    if (handleOpen) handleOpen(false);
   };
 
   return {
     id,
     inputRef,
-    inputValue: params.filters?.searchText || '',
+    inputValue: params?.searchText || '',
     handleInputChange,
     handleSubmit,
   };

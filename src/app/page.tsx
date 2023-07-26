@@ -1,35 +1,27 @@
-import { BooksOrderBy, BooksSortBy, StorefrontBooksFilters } from '@/interfaces';
+import { GetStorefrontBooksParams } from '@/interfaces';
 
-import { getStorefrontBooks } from '@/services';
+import { getBooksAuthors, getBooksLanguages, getStorefrontBooks } from '@/services';
 
+import { handleAsyncRequests } from '@/utils';
 import { CatalogProvider } from '@/contexts/catalog';
 
 import { ClientLayout } from '@/components/layouts';
 import { BooksCatalog, Header } from '@/components/sections/(main)';
 
-interface SearchParams {
-  orderBy?: string; 
-  sortBy?: string; 
-  filters?: StorefrontBooksFilters;
-}
-
 export default async function Home({ searchParams }: {
-  searchParams: SearchParams;
+  searchParams: GetStorefrontBooksParams;
 }) {
-  const { orderBy, sortBy, filters } = searchParams;
+  const { authors: authorsParams, languages: languagesParams, price: priceParams, searchText, sortBy, orderBy } = searchParams;
+  const params = { authors: authorsParams, languages: languagesParams, price: priceParams, searchText, sortBy, orderBy };
 
-  const params = {
-    orderBy: orderBy as unknown as BooksOrderBy,
-    sortBy: sortBy as unknown as BooksSortBy,
-    filters: filters 
-      ? JSON.parse(decodeURIComponent(filters as string)) as any
-      : undefined
-  };
-
-  const { books } = await getStorefrontBooks(params);
+  const { books, languages, authors } = await handleAsyncRequests([
+    getStorefrontBooks(params),
+    getBooksLanguages(),
+    getBooksAuthors(),
+  ]);
 
   return (
-    <CatalogProvider data={ { books, params } }>
+    <CatalogProvider data={ { books, params, languages, authors } }>
       <ClientLayout>
         <Header />
         <BooksCatalog />

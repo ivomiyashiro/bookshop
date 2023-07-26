@@ -7,19 +7,7 @@ const catalogReducer = (state: CatalogInitState, action: CatalogActionType): Cat
   case '[CATALOG] - LOAD BOOKS':
     return {
       ...state,
-      books: {
-        ...state.books,
-        data: action.payload
-      }
-    };
-
-  case '[CATALOG] - TOGGLE LOADING':
-    return {
-      ...state,
-      books: {
-        ...state.books,
-        loading: !state.books.loading
-      }
+      books: action.payload
     };
 
   case '[CATALOG] - CHANGE SEARCH TEXT':
@@ -27,10 +15,7 @@ const catalogReducer = (state: CatalogInitState, action: CatalogActionType): Cat
       ...state,
       params: {
         ...state.params,
-        filters: {
-          ...state.params.filters,
-          searchText: action.payload
-        }
+        searchText: action.payload
       }
     };
 
@@ -48,6 +33,12 @@ const catalogReducer = (state: CatalogInitState, action: CatalogActionType): Cat
     return {
       ...state,
       view: state.view === 'GRID' ? 'LIST' : 'GRID'
+    };
+
+  case '[CATALOG] - TOGGLE FILTER CHECKBOX':
+    return {
+      ...state,
+      filters: action.payload.updatedFilters
     };
 
   default:
