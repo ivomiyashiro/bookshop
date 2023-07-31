@@ -4,7 +4,7 @@ import { useSearchbar } from '@/hooks';
 import { Button } from '@/components/ui';
 
 const Searchbar = () => {
-  const { id, inputRef, inputValue, handleInputChange, handleSubmit } = useSearchbar(null);
+  const { id, inputRef, inputValue, handleInputChange, handleSubmit, handleResetInputValue } = useSearchbar(null);
 
   return (  
     <form className="hidden md:block w-full" onSubmit={ handleSubmit }>
@@ -22,7 +22,12 @@ const Searchbar = () => {
           ref={ inputRef }
           onChange={ handleInputChange }
         />
-        <Button style="PRIMARY" className="absolute right-3 text-sm !px-4 !py-2">
+        { inputValue.length > 0 && (
+          <Button style="ALT" className="absolute right-[6.5rem] text-sm w-[80px] !py-2" onClick={ handleResetInputValue }>
+            Clear
+          </Button>
+        ) }
+        <Button style="PRIMARY" className="absolute right-3 text-sm w-[80px] !py-2">
           Search
         </Button>
       </div>

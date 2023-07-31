@@ -20,10 +20,17 @@ const useSearchbar = (handleOpen: Dispatch<SetStateAction<boolean>> | null) => {
     if (handleOpen) handleOpen(false);
   };
 
+  const handleResetInputValue = () => {
+    changeSearchText('');
+    searchBook('');
+    inputRef.current?.focus();
+  };
+
   return {
     id,
     inputRef,
     inputValue: params?.searchText || '',
+    handleResetInputValue,
     handleInputChange,
     handleSubmit,
   };
