@@ -5,8 +5,8 @@ import { getBooksAuthors, getBooksLanguages, getStorefrontBooks } from '@/servic
 import { handleAsyncRequests } from '@/utils';
 import { CatalogProvider } from '@/contexts/catalog';
 
-import { ClientLayout } from '@/components/layouts';
-import { BooksCatalog, Header } from '@/components/sections/(main)';
+import { Catalog, CatalogHeader } from '@/app/sections';
+import Loading from './loading';
 
 export default async function Home({ searchParams }: {
   searchParams: GetStorefrontBooksParams;
@@ -22,10 +22,8 @@ export default async function Home({ searchParams }: {
 
   return (
     <CatalogProvider data={ { books, params, pagination, languages, authors } }>
-      <ClientLayout>
-        <Header />
-        <BooksCatalog />
-      </ClientLayout>
+      <CatalogHeader />
+      <Catalog />
     </CatalogProvider>
   );
 }
