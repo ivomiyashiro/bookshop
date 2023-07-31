@@ -20,7 +20,7 @@ const Filter = ({ filterId, name, values }: Props) => {
             <input type="checkbox" id={ id } checked={ checked } hidden onChange={ () => null } />
             <label 
               htmlFor={ id } 
-              className={ `w-full h-12 flex items-center justify-center text-sm transition cursor-pointer rounded-lg ${ checked ? 'bg-gray-100 dark:bg-gray-700' : 'text-gray-900 focus:outline-none bg-white  border border-gray-200 hover:text-pink-600 hover:bg-gray-100 focus:z-10 focus:ring-4 focus:ring-gray-200 dark:focus:ring-gray-700 dark:bg-gray-800 dark:text-gray-400 dark:border-gray-600 dark:hover:text-white dark:hover:bg-gray-700'}` }
+              className={ `w-full h-12 flex items-center justify-center text-xs text-center px-1 transition cursor-pointer rounded-lg ${ checked ? 'bg-gray-100 dark:bg-gray-700' : 'text-gray-900 focus:outline-none bg-white  border border-gray-200 hover:text-pink-600 hover:bg-gray-100 focus:z-10 focus:ring-4 focus:ring-gray-200 dark:focus:ring-gray-700 dark:bg-gray-800 dark:text-gray-400 dark:border-gray-600 dark:hover:text-white dark:hover:bg-gray-700'}` }
               onClick={ () => toggleFilterCheckbox(filterId, id) }
             >
               { name }
