@@ -14,14 +14,14 @@ export default async function Home({ searchParams }: {
   const { authors: authorsParams, languages: languagesParams, price: priceParams, searchText, sortBy, orderBy } = searchParams;
   const params = { authors: authorsParams, languages: languagesParams, price: priceParams, searchText, sortBy, orderBy };
 
-  const { books, languages, authors } = await handleAsyncRequests([
+  const { books, pagination, languages, authors } = await handleAsyncRequests([
     getStorefrontBooks(params),
     getBooksLanguages(),
     getBooksAuthors(),
   ]);
 
   return (
-    <CatalogProvider data={ { books, params, languages, authors } }>
+    <CatalogProvider data={ { books, params, pagination, languages, authors } }>
       <ClientLayout>
         <Header />
         <BooksCatalog />
