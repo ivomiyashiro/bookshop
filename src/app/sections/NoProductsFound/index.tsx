@@ -1,4 +1,4 @@
-import { Button } from '@/components/ui';
+import { Button } from '@/components';
 import { CatalogContext } from '@/contexts/catalog';
 import { useContext } from 'react';
 

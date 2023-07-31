@@ -6,7 +6,6 @@ import { handleAsyncRequests } from '@/utils';
 import { CatalogProvider } from '@/contexts/catalog';
 
 import { Catalog, CatalogHeader } from '@/app/sections';
-import Loading from './loading';
 
 export default async function Home({ searchParams }: {
   searchParams: GetStorefrontBooksParams;

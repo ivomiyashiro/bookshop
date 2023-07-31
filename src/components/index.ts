@@ -6,3 +6,6 @@ export { default as InputSelect } from './InputSelect';
 export { default as Modal } from './Modal';
 export { default as ToggleButton } from './ToggleButton';
 export { default as DropdownMenu } from './DropdownMenu';
+export { default as Header } from './Header';
+export { default as Footer } from './Footer';
+export { default as ProductCardSkeleton } from './ProductCardSkeleton';

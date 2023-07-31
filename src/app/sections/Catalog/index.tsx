@@ -5,7 +5,7 @@ import { useInfiniteScroll } from '@/hooks';
 
 import { CatalogContext } from '@/contexts/catalog';
 
-import { ProductCard, Spinner } from '@/components/ui';
+import { ProductCard, Spinner } from '@/components';
 import { NoProductsFound } from '../NoProductsFound';
 
 const Catalog = () => {

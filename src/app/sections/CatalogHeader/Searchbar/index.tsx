@@ -1,7 +1,7 @@
 'use client';
 import { MagnifyingGlassIcon } from '@heroicons/react/24/outline';
 import { useSearchbar } from '@/hooks';
-import { Button } from '@/components/ui';
+import { Button } from '@/components';
 
 const Searchbar = () => {
   const { id, inputRef, inputValue, handleInputChange, handleSubmit, handleResetInputValue } = useSearchbar(null);

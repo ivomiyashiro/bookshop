@@ -1,5 +1,5 @@
 import { Dispatch, SetStateAction, useContext } from 'react';
-import { Button, Modal } from '@/components/ui';
+import { Button, Modal } from '@/components';
 import { XMarkIcon, FunnelIcon } from '@heroicons/react/24/outline';
 import { CatalogContext } from '@/contexts/catalog';
 import Filter from './Filter';

@@ -1,6 +1,6 @@
 import { useContext, useState } from 'react';
 import { CatalogContext } from '@/contexts/catalog';
-import { DropdownMenu } from '@/components/ui';
+import { DropdownMenu } from '@/components';
 
 interface Props {
   filterId: number;

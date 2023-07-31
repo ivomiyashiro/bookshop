@@ -6,7 +6,7 @@ import { SortValues } from '@/interfaces';
 
 import { CatalogContext } from '@/contexts/catalog';
 
-import { Button, InputSelect, ToggleButton } from '@/components/ui';
+import { Button, InputSelect, ToggleButton } from '@/components';
 import Searchbar from './Searchbar';
 import FiltersMenu from './FiltersMenu';
 
