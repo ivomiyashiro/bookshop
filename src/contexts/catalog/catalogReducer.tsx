@@ -41,6 +41,13 @@ const catalogReducer = (state: CatalogInitState, action: CatalogActionType): Cat
       filters: action.payload.updatedFilters
     };
 
+  case '[CATALOG] - UPDATE PAGINATION':
+    return {
+      ...state,
+      pagination: action.payload.pagination
+      
+    };
+
   default:
     return state;
   }

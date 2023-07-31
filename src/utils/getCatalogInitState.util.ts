@@ -24,6 +24,7 @@ export const getCatalogInitState = (data: Data): CatalogInitState => {
   return {
     books: data.books,
     params: {
+      page: 1,
       orderBy: 'createdAt',
       sortBy: 'desc',
       ...data.params
@@ -79,5 +80,8 @@ export const getCatalogInitState = (data: Data): CatalogInitState => {
       })
     }],
     URLParams: new URLSearchParams({ ...data.params } as any),
+    pagination: {
+      ...data.pagination,
+    },
   };
 };

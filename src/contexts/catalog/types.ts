@@ -1,6 +1,6 @@
 import { ReactNode } from 'react';
 import { type URLSearchParams } from 'url';
-import { Book, BooksOrderBy, GetStorefrontBooksParams, BooksSortBy, Languages, Author, SortValues } from '@/interfaces';
+import { Book, BooksOrderBy, GetStorefrontBooksParams, BooksSortBy, Languages, Author, SortValues, Pagination } from '@/interfaces';
 
 export interface CatalogInitState {
   books: Book[];
@@ -11,7 +11,8 @@ export interface CatalogInitState {
     name: string;
     data: { id: number; name: string; checked: boolean }[];
    }[];
-   URLParams: URLSearchParams;
+  URLParams: URLSearchParams;
+  pagination: Pagination
 }
 
 
@@ -23,6 +24,7 @@ export interface ContextProps extends CatalogInitState {
   toggleView: () => void;
   toggleFilterCheckbox: (filterId: number, id: number) => void;
   resetURLParams: () => void;
+  loadMoreBooks: () => void;
 }
 
 
@@ -33,12 +35,12 @@ export interface CatalogProviderProps {
 
 
 export interface Data {
-    books: Book[]; 
-    params: GetStorefrontBooksParams;
-    languages: Languages[];
-    authors: Author[];
+  books: Book[]; 
+  params: GetStorefrontBooksParams;
+  languages: Languages[];
+  authors: Author[];
+  pagination: Pagination;
 } 
-
 
 export type CatalogActionType =
   | { type: '[CATALOG] - LOAD BOOKS', payload: Book[] }
@@ -46,3 +48,5 @@ export type CatalogActionType =
   | { type: '[CATALOG] - TOGGLE VIEW' }
   | { type: '[CATALOG] - CHANGE SORTING', payload: { orderBy: BooksOrderBy, sortBy: BooksSortBy }}
   | { type: '[CATALOG] - TOGGLE FILTER CHECKBOX', payload: { updatedFilters: { id: number; name: string; data: any; }[] }}
+  | { type: '[CATALOG] - UPDATE PAGINATION', payload: { pagination: Pagination }}
+;

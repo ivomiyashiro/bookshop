@@ -2,24 +2,36 @@
 import { FC, useEffect, useReducer } from 'react';
 import { useRouter } from 'next/navigation';
 
-import { SortValues } from '@/interfaces';
 import { CatalogProviderProps } from './types';
+import { SortValues } from '@/interfaces';
 
+import { getStorefrontBooks } from '@/services';
 import { getCatalogInitState, getSortingParams } from '@/utils';
 
 import { CatalogContext, catalogReducer } from './';
+
 
 const CatalogProvider: FC<CatalogProviderProps> = ({ children, data }) => {
   const [state, dispatch] = useReducer(catalogReducer, getCatalogInitState(data));
   const router = useRouter();
 
-
+  // Update catalog books state when route change
   useEffect(() => {
     dispatch({
       type: '[CATALOG] - LOAD BOOKS',
       payload: data.books
     });
   }, [data.books]);
+
+  // Update catalog pagination state when route change
+  useEffect(() => {
+    dispatch({
+      type: '[CATALOG] - UPDATE PAGINATION',
+      payload: {
+        pagination: data.pagination
+      }
+    });
+  }, [data.pagination]);
 
 
   const toggleView = () => dispatch({ type: '[CATALOG] - TOGGLE VIEW' });
@@ -51,6 +63,9 @@ const CatalogProvider: FC<CatalogProviderProps> = ({ children, data }) => {
 
   const searchBook = async (value: string) => {
     state.URLParams.delete('searchText');
+    state.URLParams.delete('price');
+    state.URLParams.delete('authors');
+    state.URLParams.delete('languages');
     
     if (value !== '') {
       state.URLParams.set('searchText', value);
@@ -84,6 +99,29 @@ const CatalogProvider: FC<CatalogProviderProps> = ({ children, data }) => {
     });
 
     router.push(window.location.pathname);
+  };
+
+
+  const loadMoreBooks = async () => {
+    const { page, totalPages } = state.pagination;
+
+    if (page < totalPages) {
+      const currentPage = (state.params.page || 0) + 1;
+      const { books, pagination } = await getStorefrontBooks({ page: currentPage });
+
+      dispatch({
+        type: '[CATALOG] - LOAD BOOKS',
+        payload: [
+          ...state.books,
+          ...books
+        ]
+      });
+  
+      dispatch({
+        type: '[CATALOG] - UPDATE PAGINATION',
+        payload: { pagination }
+      });
+    }
   };
 
 
@@ -158,7 +196,8 @@ const CatalogProvider: FC<CatalogProviderProps> = ({ children, data }) => {
       searchBook,
       toggleFilterCheckbox,
       toggleView,
-      resetURLParams
+      resetURLParams,
+      loadMoreBooks
     } }>
       { children }
     </CatalogContext.Provider>

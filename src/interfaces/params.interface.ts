@@ -1,6 +1,6 @@
 export interface GetStorefrontBooksParams {
   limit?: number;
-  offset?: number;
+  page?: number;
   orderBy?: BooksOrderBy;
   sortBy?: BooksSortBy;
   searchText?: string;

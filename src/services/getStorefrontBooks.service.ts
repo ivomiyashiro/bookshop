@@ -4,13 +4,17 @@ import { config } from '@/config';
 
 interface GetStorefrontBookData {
   books:      Book[];
-  count:      number;
-  totalCount: number;
+  pagination: {
+    count: number;
+    totalCount: number;
+    page: number;
+    totalPages: number;
+  }
 }
 
 export const getStorefrontBooks = async({ 
-  limit = 10, 
-  offset = 0, 
+  limit = 12, 
+  page = 1, 
   orderBy = 'createdAt', 
   sortBy = 'desc', 
   languages,
@@ -24,7 +28,7 @@ export const getStorefrontBooks = async({
     const { data } = await axios.get(`${BASE_API_URL}/storefront/books`, {
       params: {
         limit,
-        offset,
+        page,
         orderBy,
         sortBy,
         languages,
@@ -34,12 +38,11 @@ export const getStorefrontBooks = async({
       }
     });
 
-    const { books, count, totalCount } = data.data;
+    const { books, pagination } = data.data;
 
     return {
       books,
-      count,
-      totalCount
+      pagination,
     };
   } catch (error) {
     if (error instanceof AxiosError) {
