@@ -5,7 +5,7 @@ import { getBooksAuthors, getBooksLanguages, getStorefrontBooks } from '@/servic
 import { handleAsyncRequests } from '@/utils';
 import { CatalogProvider } from '@/contexts/catalog';
 
-import { Catalog, CatalogHeader } from '@/app/sections';
+import { Catalog, CatalogHeader } from '@/app/(sections)';
 
 export default async function Home({ searchParams }: {
   searchParams: GetStorefrontBooksParams;
