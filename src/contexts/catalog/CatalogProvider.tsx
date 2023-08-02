@@ -71,6 +71,8 @@ const CatalogProvider: FC<CatalogProviderProps> = ({ children, data }) => {
       state.URLParams.set('searchText', value);
     }
 
+    resetFilters();
+
     router.push(`${window.location.pathname}?${state.URLParams}`);
   };
 
@@ -80,6 +82,13 @@ const CatalogProvider: FC<CatalogProviderProps> = ({ children, data }) => {
     state.URLParams.delete('authors');
     state.URLParams.delete('languages');
 
+    resetFilters();
+
+    router.push(window.location.pathname);
+  };
+
+
+  const resetFilters = () => {
     dispatch({
       type: '[CATALOG] - TOGGLE FILTER CHECKBOX',
       payload: { 
@@ -97,8 +106,6 @@ const CatalogProvider: FC<CatalogProviderProps> = ({ children, data }) => {
           })
         ] }
     });
-
-    router.push(window.location.pathname);
   };
 
 
@@ -126,6 +133,8 @@ const CatalogProvider: FC<CatalogProviderProps> = ({ children, data }) => {
 
 
   const toggleFilterCheckbox = (filterId: number, id: number) => {
+    state.URLParams.delete('searchText');
+
     dispatch({
       type: '[CATALOG] - TOGGLE FILTER CHECKBOX',
       payload: { 

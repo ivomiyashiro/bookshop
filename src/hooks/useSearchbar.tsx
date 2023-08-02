@@ -22,7 +22,6 @@ const useSearchbar = (handleOpen: Dispatch<SetStateAction<boolean>> | null) => {
 
   const handleResetInputValue = () => {
     changeSearchText('');
-    searchBook('');
     inputRef.current?.focus();
   };
 

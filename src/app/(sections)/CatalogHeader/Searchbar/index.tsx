@@ -23,7 +23,7 @@ const Searchbar = () => {
           onChange={ handleInputChange }
         />
         { inputValue.length > 0 && (
-          <Button style="ALT" className="absolute right-[6.5rem] text-sm w-[80px] !py-2" onClick={ handleResetInputValue }>
+          <Button type="button" style="ALT" className="absolute right-[6.5rem] text-sm w-[80px] !py-2" onClick={ handleResetInputValue }>
             Clear
           </Button>
         ) }
