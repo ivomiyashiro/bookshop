@@ -9,3 +9,5 @@ export { default as DropdownMenu } from './DropdownMenu';
 export { default as Header } from './Header';
 export { default as Footer } from './Footer';
 export { default as ProductCardSkeleton } from './ProductCardSkeleton';
+export { default as DefaultImage } from './DefaultImage';
+export { default as Breadcrumbs } from './Breadcrumbs';

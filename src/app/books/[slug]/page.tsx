@@ -1,5 +1,7 @@
+import { HomeIcon } from '@heroicons/react/24/solid';
 import { getBookBySlug } from '@/services';
 import { Gallery, Information } from './(sections)';
+import { Breadcrumbs } from '@/components';
 
 export default async function Book({ params }: {
   params: { slug: string }
@@ -8,16 +10,29 @@ export default async function Book({ params }: {
   const { book } = await getBookBySlug(slug);
 
   return (
-    <section className="flex flex-col md:flex-row w-full gap-10 max-w-[1200px] mx-auto">
-      <Gallery 
-        image={ book.image } 
-        altText={ book.title } 
-      />
-      <Information 
-        title={ book.title } 
-        authors={ book.authors } 
-        description={ book.description } 
-      />
-    </section>
+    <div className="max-w-[1200px] mx-auto">
+      <section className="flex justify-between">
+        <div className="flex items-center ">
+          <HomeIcon width={ 18 } height={ 18 } className="hidden md:flex text-gray-500" />
+          <Breadcrumbs items={ [
+            { label: 'Home', link: '/' },
+            { label: 'Books', link: '/' },
+            { label: `${ book.title }`, link: `/${ slug }` }
+          ] } />
+        </div>
+      </section>
+      <section className="flex flex-col md:flex-row w-full gap-10 mt-6">
+        <Gallery 
+          image={ book.image } 
+          altText={ book.title } 
+        />
+        <Information 
+          bookId={ book.id }
+          title={ book.title } 
+          authors={ book.authors } 
+          description={ book.description } 
+        />
+      </section>
+    </div>
   );
 }

@@ -1,17 +1,37 @@
-import { Button, InputSelect } from '@/components';
+'use client';
+import { useEffect, useState } from 'react';
 import { Author } from '@/interfaces';
+import { getBookById } from '@/services';
+import { Breadcrumbs, Button, InputSelect } from '@/components';
+import { HomeIcon } from '@heroicons/react/24/outline';
 
 interface Props {
+  bookId: number;
   title: string;
   authors: Author[];
   description: string;
 }
 
 const Information = ({
+  bookId,
   title,
   authors,
   description
 }: Props) => {
+  const [price, setPrice] = useState<number | null>(null);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    const loadBook = async () => {
+      const { book } = await getBookById(bookId, ['price']);
+      setPrice(book.price);
+    };
+
+    setLoading(true);
+    loadBook();
+    setLoading(false);
+  }, [bookId]);
+
   return (
     <div className="md:w-full">
       <h1 className="text-2xl md:text-3xl lg:text-4xl font-bold !leading-[1.35em]">{ title }</h1>
@@ -21,7 +41,11 @@ const Information = ({
           <span key={ author.id } className="after:content-[','] after:last:content-['']"> { author.name } </span>
         ))}
       </p>
-      <h3 className="text-3xl lg:text-4xl font-bold my-8">$ { 'hola' }</h3>
+      <div className="my-8 h-9">
+        { !loading 
+          ? <h3 className="text-3xl lg:text-4xl font-bold"> $ { price } </h3>
+          : <div className="w-24 h-full rounded-lg bg-gray-200 dark:bg-gray-700 animate-pulse"></div> } 
+      </div>
       <div className="flex gap-4 my-8">
         <InputSelect 
           values={ [1, 2, 3, 4, 5] }
