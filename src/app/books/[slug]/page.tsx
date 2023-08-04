@@ -3,6 +3,8 @@ import { getBookBySlug } from '@/services';
 import { Gallery, Information } from './(sections)';
 import { Breadcrumbs } from '@/components';
 
+export const revalidate = 86400; // 1d
+
 export default async function Book({ params }: {
   params: { slug: string }
 }) {
@@ -22,16 +24,8 @@ export default async function Book({ params }: {
         </div>
       </section>
       <section className="flex flex-col md:flex-row w-full gap-10 mt-6">
-        <Gallery 
-          image={ book.image } 
-          altText={ book.title } 
-        />
-        <Information 
-          bookId={ book.id }
-          title={ book.title } 
-          authors={ book.authors } 
-          description={ book.description } 
-        />
+        <Gallery image={ book.image } altText={ book.title } />
+        <Information book={ book } />
       </section>
     </div>
   );

@@ -1,43 +1,41 @@
 'use client';
-import { useEffect, useState } from 'react';
-import { Author } from '@/interfaces';
+import { useContext, useEffect, useState } from 'react';
+
+import { Book } from '@/interfaces';
 import { getBookById } from '@/services';
-import { Breadcrumbs, Button, InputSelect } from '@/components';
-import { HomeIcon } from '@heroicons/react/24/outline';
 
-interface Props {
-  bookId: number;
-  title: string;
-  authors: Author[];
-  description: string;
-}
+import { CartContext } from '@/contexts/cart';
 
-const Information = ({
-  bookId,
-  title,
-  authors,
-  description
-}: Props) => {
-  const [price, setPrice] = useState<number | null>(null);
+import { Button, InputSelect } from '@/components';
+
+interface Props { book: Book; }
+
+const Information = ({ book }: Props) => {
+  const { cart, addToCart } = useContext(CartContext);
+  const [price, setPrice] = useState<number>(0);
+  const [stock, setStock] = useState<number>(0);
   const [loading, setLoading] = useState(true);
+  const [quantity, setQuantity] = useState(1);
+  const isInCart = cart.find(cartItem => cartItem.id === book.id) ? true : false;
 
   useEffect(() => {
     const loadBook = async () => {
-      const { book } = await getBookById(bookId, ['price']);
-      setPrice(book.price);
+      const { book: dbBook } = await getBookById(book.id, ['price', 'stock']);
+      setPrice(dbBook.price);
+      setStock(dbBook.stock);
     };
 
     setLoading(true);
     loadBook();
     setLoading(false);
-  }, [bookId]);
+  }, [book.id]);
 
   return (
     <div className="md:w-full">
-      <h1 className="text-2xl md:text-3xl lg:text-4xl font-bold !leading-[1.35em]">{ title }</h1>
+      <h1 className="text-2xl md:text-3xl lg:text-4xl font-bold !leading-[1.35em]">{ book.title }</h1>
       <p className="text-sm mt-2 text-gray-400">
       By: 
-        { authors.map(author => (
+        { book.authors.map(author => (
           <span key={ author.id } className="after:content-[','] after:last:content-['']"> { author.name } </span>
         ))}
       </p>
@@ -48,17 +46,35 @@ const Information = ({
       </div>
       <div className="flex gap-4 my-8">
         <InputSelect 
-          values={ [1, 2, 3, 4, 5] }
+          values={ Array.from(Array(stock), (_, index) => index + 1) }
           icon={ <p className="font-semibold">QTY</p> }
-        // onChange={ () => null }
+          onChange={ (e: React.ChangeEvent<HTMLSelectElement>) => setQuantity(parseInt(e.target.value)) }
         />
-        <Button style="PRIMARY" className="w-full h-[55px]">
-          <span className="font-bold">ADD TO CART</span>
+        <Button 
+          style="PRIMARY" 
+          className="w-full h-[55px]"
+          disabled={ stock <= 0 ? true : (isInCart ? true : false) }
+          onClick={ () => addToCart({ 
+            id: book.id, 
+            title: book.title,
+            image: book.image,
+            authors: book.authors, 
+            price, 
+            quantity 
+          }) }
+        >
+          <span className="font-bold">
+            { stock <=0 
+              ? 'NO STOCK'
+              : (isInCart 
+                ? 'BOOK IN CART'
+                : 'ADD TO CART') }
+          </span>
         </Button>
       </div>
       <div>
         <p className="font-bold mb-2 ">About this book</p>
-        <p className="text-gray-400">{ description }</p>
+        <p className="text-gray-400">{ book.description }</p>
       </div>
     </div>
   );

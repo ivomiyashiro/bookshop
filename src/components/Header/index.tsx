@@ -1,10 +1,14 @@
 'use client';
-import { useState } from 'react';
+import { useContext, useState } from 'react';
 import { ShoppingBagIcon, UserIcon, MagnifyingGlassIcon } from '@heroicons/react/24/outline';
+
+import { CartContext } from '@/contexts/cart';
+
 import { MainLogo, Button } from '@/components';
 import { MobileSearchbar, CartMenu } from './components';
 
 const Header = () => {
+  const { totalProducts } = useContext(CartContext);
   const [searchbarOpen, setSearchbarOpen] = useState(false);
   const [cartMenuOpen, setCartMenuOpen] = useState(false);
 
@@ -26,7 +30,7 @@ const Header = () => {
                 <MagnifyingGlassIcon width={ 22 } height={ 22 } aria-label="Open search menu" />
               </Button>
             </li>
-            <li className="flex items-center">
+            <li className="flex items-center relative">
               <Button 
                 width="w-[36px]" 
                 height="h-[36px]" 
@@ -35,6 +39,11 @@ const Header = () => {
               >
                 <ShoppingBagIcon width={ 22 } height={ 22 } aria-label="Open cart menu" />
               </Button>
+              { totalProducts > 0 && (
+                <span className="absolute text-[0.6rem] w-4 h-4 -right-2 -top-2 bg-pink-500 text-white rounded-full flex items-center justify-center">
+                  { totalProducts }
+                </span>
+              ) }
             </li>
             <li className="flex items-center">
               <Button 

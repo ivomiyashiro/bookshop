@@ -1,14 +1,15 @@
 'use client';
-import { ChangeEvent, ReactElement, useId } from 'react';
+import { useId } from 'react';
 
 interface Props {
-  icon?: ReactElement;
+  icon?: React.ReactElement;
   values: string[] | number[];
   label?: string;
-  onChange: (e: ChangeEvent<HTMLSelectElement>) => void;
+  valueSelected?: number | string;
+  onChange: (e: React.ChangeEvent<HTMLSelectElement>) => void;
 }
 
-const InputSelect = ({ icon: Icon, values, label, onChange }: Props) => {
+const InputSelect = ({ icon: Icon, valueSelected, values, label, onChange }: Props) => {
   const id = useId();
 
   return (
@@ -22,7 +23,13 @@ const InputSelect = ({ icon: Icon, values, label, onChange }: Props) => {
         { Icon && Icon }
         <select id={ id } className="bg-transparent w-full outline-none" onChange={ onChange }>
           { values.map((value, i) => (
-            <option key={ i } value={ value }>{ value }</option>
+            <option 
+              key={ i } 
+              value={ value }
+              selected={ valueSelected === value }
+            >
+              { value }
+            </option>
           ))}
         </select>
       </div>

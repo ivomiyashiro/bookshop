@@ -1,12 +1,14 @@
-import { Dispatch, SetStateAction, useContext } from 'react';
-import { Button, Modal } from '@/components';
+import { useContext } from 'react';
 import { XMarkIcon, FunnelIcon } from '@heroicons/react/24/outline';
+
 import { CatalogContext } from '@/contexts/catalog';
+
+import { Button, Modal } from '@/components';
 import Filter from './Filter';
 
 interface Props {
   open: boolean;
-  handleOpen: Dispatch<SetStateAction<boolean>>;
+  handleOpen: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
 const FiltersMenu = ({ open, handleOpen }: Props) => {
@@ -14,7 +16,7 @@ const FiltersMenu = ({ open, handleOpen }: Props) => {
 
   return (
     <Modal open={ open } handleOpen={ handleOpen }>
-      <aside className={ `fixed top-0 right-0 h-screen bg-gray-900 shadow-[0_35px_60px_-15px_rgba(0,0,0,.5)]  z-50 md:rounded-l-2xl transition-all overflow-hidden ${ open ? 'w-full lg:w-[470px]' : 'w-[0px]' }` }>
+      <aside className={ `fixed top-0 right-0 h-screen bg-gray-900 shadow-[0_35px_60px_-15px_rgba(0,0,0,.5)]  z-50 md:rounded-l-2xl transition-all overflow-hidden ${ open ? 'w-full md:w-[470px]' : 'w-[0px]' }` }>
         <div className="flex flex-col h-full relative">
           <div className="p-5 flex items-center justify-between">
             <h2 className="flex gap-2 items-center">

@@ -32,7 +32,6 @@ const ProductCard = ({ book }: { book: Book }) => {
               <span key={ author.id } className="after:content-['·'] after:last:content-['']"> { author.name } </span>
             );
           }) }
-            
         </p>
         <p className="font-semibold">${ book.price }</p>
       </div>
