@@ -3,6 +3,7 @@ import { ChangeEvent, useContext, useState } from 'react';
 import { ArrowsUpDownIcon, FunnelIcon } from '@heroicons/react/24/outline';
 
 import { SortValues } from '@/interfaces';
+import { BOOKS_SORTING_VALUES } from '@/constants';
 
 import { CatalogContext } from '@/contexts/catalog';
 
@@ -11,7 +12,6 @@ import Searchbar from './Searchbar';
 import FiltersMenu from './FiltersMenu';
 
 const CatalogHeader = () => {
-  const SORTING_VALUES: SortValues[] = ['NEWER', 'OLDER', 'HIGHER PRICE', 'LOWER PRICE', 'A - Z', 'Z - A'];
   const { view, toggleView, sortBooks } = useContext(CatalogContext);
   const [filtersMenuOpen, setFiltersMenuOpen] = useState(false);
 
@@ -27,7 +27,7 @@ const CatalogHeader = () => {
       <div className="flex gap-2 md:gap-4">
         <InputSelect
           icon={ <ArrowsUpDownIcon width={ 24 } height={ 24 } /> }
-          values={ SORTING_VALUES }
+          values={ BOOKS_SORTING_VALUES }
           onChange={ (e: ChangeEvent<HTMLSelectElement>) => sortBooks(e.target.value as SortValues) }
         />
         <Button style="PRIMARY" onClick={ () => setFiltersMenuOpen(true) }>

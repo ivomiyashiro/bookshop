@@ -3,6 +3,8 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { TrashIcon } from '@heroicons/react/24/outline';
 
+import { CART_MAX_QTY } from '@/constants';
+
 import { CartItem as ICartItem, CartContext } from '@/contexts/cart';
 
 import { Button, InputSelect } from '@/components';
@@ -46,7 +48,7 @@ export const CartItem = ({ book, handleCloseModal }: Props) => {
             <TrashIcon width={ 20 } height={ 20 }/>
           </Button>
           <InputSelect
-            values={ [1, 2, 3, 4, 5] }
+            values={ CART_MAX_QTY }
             valueSelected={ book.quantity }
             icon={ <p className="font-semibold">QTY</p> }
             onChange={ (e: React.ChangeEvent<HTMLSelectElement>) => updateProductQuantity({ ...book, quantity: parseInt(e.target.value) }) }
