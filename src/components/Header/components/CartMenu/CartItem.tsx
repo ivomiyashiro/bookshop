@@ -49,7 +49,7 @@ export const CartItem = ({ book, handleCloseModal }: Props) => {
           </Button>
           <InputSelect
             values={ CART_MAX_QTY }
-            valueSelected={ book.quantity }
+            selectedValue={ book.quantity }
             icon={ <p className="font-semibold">QTY</p> }
             onChange={ (e: React.ChangeEvent<HTMLSelectElement>) => updateProductQuantity({ ...book, quantity: parseInt(e.target.value) }) }
           />

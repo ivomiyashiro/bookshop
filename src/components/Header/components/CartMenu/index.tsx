@@ -1,9 +1,11 @@
-import { useContext } from 'react';
+import { useContext, useState } from 'react';
+import { useRouter } from 'next/navigation';
 import { XMarkIcon } from '@heroicons/react/24/solid';
 
+import { createPayment } from '@/services';
 import { CartContext } from '@/contexts/cart';
 
-import { Button, Modal } from '@/components';
+import { Button, Modal, Spinner } from '@/components';
 import { CartItem } from './CartItem';
 
 interface Props {
@@ -13,6 +15,24 @@ interface Props {
 
 const CartMenu = ({ open, handleOpen }: Props) => {
   const { cart, orderTotalPrice, totalProducts } = useContext(CartContext);
+  const [loading, setLoading] = useState(false);
+  const router = useRouter();
+  console.log(loading);
+  const handleCheckout = async () => {
+    try {
+      setLoading(true);
+      const { data } = await createPayment(cart);
+    } catch (error) {
+      if (error instanceof Error) {
+        if (error.message === 'Unauthorized') {
+          handleOpen(false);
+          router.push('/login');
+        }
+      }
+    } finally {
+      setLoading(false);
+    }
+  };
 
   return (
     <Modal open={ open } handleOpen={ () => handleOpen(false) }>
@@ -48,16 +68,20 @@ const CartMenu = ({ open, handleOpen }: Props) => {
                   </div>
                   <div className="flex justify-between">
                     <p className="font-semibold">TOTAL</p>
-                    <p className="font-semibold">${ orderTotalPrice }</p>
+                    <p className="font-semibold">$ { orderTotalPrice }</p>
                   </div>
                 </div>
                 <Button
                   height="h-16"
                   style="PRIMARY"
-                  type="link"
-                  href="/cart/checkout?step=1"
+                  type="button"
+                  onClick={ handleCheckout }
                 >
-                  <span className="font-bold ">GO TO CHECKOUT</span>
+                  { loading
+                    ? <Spinner width="w-7" />
+                    : ( <span className="font-bold ">
+                      GO TO CHECKOUT
+                    </span> ) } 
                 </Button>
               </div>
             )

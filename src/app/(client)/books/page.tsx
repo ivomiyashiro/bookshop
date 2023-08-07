@@ -1,11 +1,18 @@
+import { Metadata } from 'next';
+
 import { GetStorefrontBooksParams } from '@/interfaces';
 
 import { getBooksAuthors, getBooksLanguages, getStorefrontBooks } from '@/services';
-
 import { handleAsyncRequests } from '@/utils';
+
 import { CatalogProvider } from '@/contexts/catalog';
 
-import { Catalog, CatalogHeader } from '@/app/(sections)';
+import { Catalog, CatalogHeader } from './(sections)';
+
+export const metadata: Metadata = {
+  title: 'Our Catalog | Bookshop',
+  description: 'Here you will find our list of books available.',
+};
 
 export default async function Home({ searchParams }: {
   searchParams: GetStorefrontBooksParams;

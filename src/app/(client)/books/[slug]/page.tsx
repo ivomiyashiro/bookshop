@@ -1,7 +1,9 @@
 import { HomeIcon } from '@heroicons/react/24/solid';
+
 import { getBookBySlug } from '@/services';
-import { Gallery, Information } from './(sections)';
+
 import { Breadcrumbs } from '@/components';
+import { Gallery, Information } from './(sections)';
 
 export const revalidate = 86400; // 1d
 
@@ -18,8 +20,8 @@ export default async function Book({ params }: {
           <HomeIcon width={ 18 } height={ 18 } className="hidden md:flex text-gray-500" />
           <Breadcrumbs items={ [
             { label: 'Home', link: '/' },
-            { label: 'Books', link: '/' },
-            { label: `${ book.title }`, link: `/${ slug }` }
+            { label: 'Books', link: '/books' },
+            { label: `${ book.title }`, link: `/books/${ slug }` }
           ] } />
         </div>
       </section>

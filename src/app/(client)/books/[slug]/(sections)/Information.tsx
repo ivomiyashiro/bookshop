@@ -45,7 +45,8 @@ const Information = ({ book }: Props) => {
           : <div className="w-24 h-full rounded-lg bg-gray-200 dark:bg-gray-700 animate-pulse"></div> } 
       </div>
       <div className="flex gap-4 my-8">
-        <InputSelect 
+        <InputSelect
+          selectedValue={ quantity }
           values={ Array.from(Array(stock), (_, index) => index + 1) }
           icon={ <p className="font-semibold">QTY</p> }
           onChange={ (e: React.ChangeEvent<HTMLSelectElement>) => setQuantity(parseInt(e.target.value)) }
