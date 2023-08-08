@@ -4,3 +4,6 @@ export * from './getBooksLanguages.service';
 export * from './getBookBySlug.service';
 export * from './getBookById.service';
 export * from './createPayment.service';
+export * from './loginWithCredentials.service';
+export * from './signupWithCredentials.service';
+export * from './checkRefreshToken.service';

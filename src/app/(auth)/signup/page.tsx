@@ -1,23 +1,32 @@
 'use client';
 import { config } from '@/config';
-import { useLoginForm } from './useLoginForm';
+import { useSigninForm } from './useSignupForm';
 
 import { Spinner, Input, Button } from '@/components';
 
-export default function Login() {
+export default function Signup() {
   const { BASE_API_URL } = config;
-  const { 
+  const {
+    nameValue,
     emailValue, 
     passwordValue,
     error,
     loading,
+    handleNameValue,
     handlePasswordValue,
     handleEmailValue,
     handleSubmit,
-  } = useLoginForm();
-
+  } = useSigninForm();
+  
   return (
     <form className="flex flex-col" onSubmit={ handleSubmit }>
+      <Input 
+        label="Full name"
+        placeholder="Enter your name..."
+        type="text"
+        value={ nameValue }
+        onChange={ (e: React.ChangeEvent<HTMLInputElement>) => handleNameValue(e.target.value) }
+      />
       <Input 
         label="Enter email"
         placeholder="Enter your email..."
@@ -43,7 +52,7 @@ export default function Login() {
         >
           { loading
             ? <Spinner />
-            : 'Log in' }
+            : 'Sign up' }
         </Button>
         <Button
           type="link"
@@ -51,7 +60,7 @@ export default function Login() {
           height="h-[42px]"
           href={ `${BASE_API_URL}/auth/provider/google/callback` }
         >
-          Log in with Google
+          Sign up with Google
         </Button>
       </div>
     </form>

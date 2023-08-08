@@ -1,16 +1,6 @@
-import type { Metadata } from 'next';
 import { cookies } from 'next/headers';
-
 import { CartProvider } from '@/contexts/cart';
-
 import { Header, Footer } from '@/components';
-
-import '../globals.css';
-
-export const metadata: Metadata = {
-  title: 'BookShop | Books',
-  description: 'Here you will find our list of books.',
-};
 
 export default function RootLayout({
   children,

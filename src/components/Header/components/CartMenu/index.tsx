@@ -17,7 +17,7 @@ const CartMenu = ({ open, handleOpen }: Props) => {
   const { cart, orderTotalPrice, totalProducts } = useContext(CartContext);
   const [loading, setLoading] = useState(false);
   const router = useRouter();
-  console.log(loading);
+
   const handleCheckout = async () => {
     try {
       setLoading(true);
