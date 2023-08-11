@@ -23,6 +23,12 @@ const authReducer = (state: AuthState, action: AuthActionType): AuthState => {
       loading: action.payload
     };
 
+  case '[AUTH] - Checkout':
+    return {
+      ...state,
+      checkout: action.payload
+    };
+
   default:
     return state;
   }

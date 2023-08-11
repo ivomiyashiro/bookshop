@@ -1,5 +1,4 @@
 import { cookies } from 'next/headers';
-import { CartProvider } from '@/contexts/cart';
 import { Header, Footer } from '@/components';
 
 export default function RootLayout({
@@ -17,12 +16,12 @@ export default function RootLayout({
   }
 
   return (
-    <CartProvider initialCart={ initialCart }>
+    <>
       <Header />
       <main className="px-4 lg:px-6 my-10 min-h-[calc(100vh-162px)]">
         { children }
       </main>
       <Footer />
-    </CartProvider>
+    </>
   );
 }

@@ -36,7 +36,7 @@ const CartMenu = ({ open, handleOpen }: Props) => {
       if (error instanceof Error) {
         if (error.message === 'Unauthorized') {
           handleOpen(false);
-          router.push('/login');
+          router.push('/login?checkout=true');
         }
       }
     } finally {
@@ -61,56 +61,52 @@ const CartMenu = ({ open, handleOpen }: Props) => {
             </Button>
           </div>
           { cart.length > 0
-            ? (
-              <div className="p-4 h-full flex flex-col">
-                <div className=" flex flex-col max-h-[530px] pb-6 gap-4 overflow-y-auto scrollbar-hidden">
-                  { cart.map(book => (
-                    <CartItem 
-                      key={ book.id } 
-                      book={ book } 
-                      handleCloseModal={ () => handleOpen(false) }
-                    />
-                  )) }
+            ? ( <div className="p-4 h-full flex flex-col">
+              <div className=" flex flex-col max-h-[530px] pb-6 gap-4 overflow-y-auto scrollbar-hidden">
+                { cart.map(book => (
+                  <CartItem 
+                    key={ book.id } 
+                    book={ book } 
+                    handleCloseModal={ () => handleOpen(false) }
+                  />
+                )) }
+              </div>
+              <div className="px-4 py-6 border-t flex flex-col gap-4 w-full mt-auto">
+                <div className="flex justify-between">
+                  <p className="font-semibold">{ totalProducts } BOOKS</p>
                 </div>
-                <div className="px-4 py-6 border-t flex flex-col gap-4 w-full mt-auto">
-                  <div className="flex justify-between">
-                    <p className="font-semibold">{ totalProducts } BOOKS</p>
-                  </div>
-                  <div className="flex justify-between">
-                    <p className="font-semibold">TOTAL</p>
-                    <p className="font-semibold">$ { orderTotalPrice }</p>
-                  </div>
+                <div className="flex justify-between">
+                  <p className="font-semibold">TOTAL</p>
+                  <p className="font-semibold">$ { orderTotalPrice }</p>
                 </div>
-                <Button
-                  height="h-16"
-                  style="PRIMARY"
-                  type="button"
-                  onClick={ handleCheckout }
-                >
-                  { loading
-                    ? <Spinner width="w-7" />
-                    : ( <span className="font-bold ">
+              </div>
+              <Button
+                height="h-16"
+                style="PRIMARY"
+                type="button"
+                onClick={ handleCheckout }
+              >
+                { loading
+                  ? <Spinner width="w-7" />
+                  : ( <span className="font-bold ">
                       GO TO CHECKOUT
-                    </span> ) } 
+                  </span> ) } 
+              </Button>
+            </div> )
+            : ( <div className="grid place-content-center h-full text-center">
+              <p className="font-bold mb-5 text-2xl">YOUR CART IS EMPTY!</p>
+              <p className="mb-5 text-gray-400">There are no products in your bag.</p>
+              <div className="" onClick={ () => handleOpen(false) }>
+                <Button 
+                  style="PRIMARY"
+                  type="link"
+                  href="/" 
+                  className="w-[180px] mx-auto"
+                >
+                    SHOP PRODUCTS
                 </Button>
               </div>
-            )
-            : (
-              <div className="grid place-content-center h-full text-center">
-                <p className="font-bold mb-5 text-2xl">YOUR CART IS EMPTY!</p>
-                <p className="mb-5 text-gray-400">There are no products in your bag.</p>
-                <div className="" onClick={ () => handleOpen(false) }>
-                  <Button 
-                    style="PRIMARY"
-                    type="link"
-                    href="/" 
-                    className="w-[180px] mx-auto"
-                  >
-                    SHOP PRODUCTS
-                  </Button>
-                </div>
-              </div>
-            ) }
+            </div> ) }
         </div>
       </aside>
     </Modal>

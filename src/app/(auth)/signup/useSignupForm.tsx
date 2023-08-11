@@ -1,5 +1,5 @@
 import { FormEvent, useContext, useState } from 'react';
-import { useRouter } from 'next/navigation';
+import { useRouter, useSearchParams } from 'next/navigation';
 import { AuthContext } from '@/contexts/auth';
 
 export const useSigninForm = () => {
@@ -12,6 +12,7 @@ export const useSigninForm = () => {
   const [error, setError] = useState('');
 
   const router = useRouter();
+  const params = useSearchParams();
 
   const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -38,15 +39,19 @@ export const useSigninForm = () => {
       });
 
       setError('');
+
+      if (!!!params.get('checkout')) {
+        return router.push('/login');
+      }
   
-      router.push('/login');
+      router.push('/login?checkout=true');
     } catch (error) {
+      setLoading(false);
+
       if (error instanceof Error) {
         setError('* ' + error.message);
       }
       
-    } finally {
-      setLoading(false);
     }
   };
 

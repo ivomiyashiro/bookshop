@@ -1,9 +1,15 @@
 import { FormEvent, useContext, useState } from 'react';
-import { useRouter } from 'next/navigation';
+import { useRouter, useSearchParams } from 'next/navigation';
+import Cookies from 'js-cookie';
+
 import { AuthContext } from '@/contexts/auth';
+import { CartContext } from '@/contexts/cart';
+
+import { createPayment } from '@/services';
 
 export const useLoginForm = () => {
   const { login } = useContext(AuthContext);
+  const { cart } = useContext(CartContext);
 
   const [emailValue, setEmailValue] = useState('');
   const [passwordValue, setPasswordValue] = useState('');
@@ -11,6 +17,7 @@ export const useLoginForm = () => {
   const [error, setError] = useState('');
 
   const router = useRouter();
+  const params = useSearchParams();
 
   const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -33,14 +40,23 @@ export const useLoginForm = () => {
 
       setError('');
 
-      router.refresh();
+      const at = Cookies.get('ACCESS_TOKEN') as string;
+
+      if (!!!params.get('checkout')) {
+        return router.refresh();
+      }
+
+      const { url } = await createPayment(cart, at);
+
+      Cookies.remove('CART');
+      return location.href = url;
 
     } catch (error) {
+      setLoading(false);
+
       if (error instanceof Error) {
         setError('* ' + error.message);
       }
-    } finally {
-      setLoading(false);
     }
   };
 

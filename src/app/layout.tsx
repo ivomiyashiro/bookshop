@@ -1,6 +1,7 @@
 import { cookies } from 'next/headers';
 import { Inter } from 'next/font/google';
 
+import { CartProvider } from '@/contexts/cart';
 import { AuthProvider } from '@/contexts/auth';
 
 import './globals.css';
@@ -24,9 +25,11 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={ inter.className }>
-        <AuthProvider>
-          { children }
-        </AuthProvider>
+        <CartProvider initialCart={ initialCart }>
+          <AuthProvider>
+            { children }
+          </AuthProvider>
+        </CartProvider>
       </body>
     </html>
   );

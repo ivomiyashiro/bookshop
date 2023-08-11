@@ -3,6 +3,7 @@ import { User } from '@/interfaces';
 export interface ContextProps {
   user: User | null;
   loading: boolean;
+  checkout: boolean;
 
   // Methods
   login: ({ email , password }: { 
@@ -20,9 +21,11 @@ export interface ContextProps {
 export interface AuthState {
   user: User | null;
   loading: boolean;
+  checkout: boolean;
 }
 
 export type AuthActionType = 
 | { type: '[AUTH] - Login', payload: User }
 | { type: '[AUTH] - Signout' }
 | { type: '[AUTH] - Loading', payload: boolean }
+| { type: '[AUTH] - Checkout', payload: boolean }

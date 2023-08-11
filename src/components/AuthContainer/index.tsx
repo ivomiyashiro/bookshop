@@ -7,7 +7,7 @@ import { AuthContext } from '@/contexts/auth';
 import { Spinner } from '@/components';
 
 const AuthContainer = ({ children }: { children: React.ReactNode }) => {
-  const { user, loading } = useContext(AuthContext);
+  const { user, loading, checkout } = useContext(AuthContext);
   const router = useRouter();
 
   if (loading) {
@@ -17,8 +17,8 @@ const AuthContainer = ({ children }: { children: React.ReactNode }) => {
       </div>
     );
   } 
-  
-  if (user) {
+  // if no checkout in params return to homepage
+  if (user && !checkout) {
     router.push('/'); 
     return null;
   }

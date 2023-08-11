@@ -1,6 +1,6 @@
 'use client';
-import { useReducer, useEffect } from 'react';
-import { useRouter } from 'next/navigation';
+import { useReducer, useEffect, use } from 'react';
+import { useRouter, useSearchParams } from 'next/navigation';
 import Cookies from 'js-cookie';
 
 import { User } from '@/interfaces';
@@ -12,8 +12,10 @@ const AuthProvider = ({ children }: { children: React.ReactNode }) => {
   const [state, dispatch] = useReducer(authReducer, { 
     user: null,
     loading: true,
+    checkout: false
   });
   const router = useRouter();
+  const params = useSearchParams();
 
   // Check if refresh_token is valid and login user
   useEffect(() => {
@@ -53,6 +55,22 @@ const AuthProvider = ({ children }: { children: React.ReactNode }) => {
 
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
+
+  
+  // Check if after login needs to go to checkout page
+  useEffect(() => {
+    if (params.get('checkout')) {
+      return dispatch({ 
+        type: '[AUTH] - Checkout',
+        payload: true
+      });
+    }
+
+    dispatch({ 
+      type: '[AUTH] - Checkout',
+      payload: false
+    });
+  }, [params]);
 
 
   const login = async ({ email, password }: { email: string; password: string }) => {
