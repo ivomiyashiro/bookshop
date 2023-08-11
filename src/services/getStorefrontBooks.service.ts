@@ -3,7 +3,7 @@ import { GetStorefrontBooksParams, Book } from '@/interfaces';
 import { config } from '@/config';
 
 interface GetStorefrontBookData {
-  books:      Book[];
+  books: Book[];
   pagination: {
     count: number;
     totalCount: number;

@@ -15,7 +15,7 @@ const Header = () => {
   const [cartMenuOpen, setCartMenuOpen] = useState(false);
 
   return (
-    <header className="relative w-full h-[62px] flex items-center shadow-[inset_0_-1px_0_0_hsla(0,0%,100%,.1)]">
+    <header className="relative z-50 w-full h-[62px] flex items-center shadow-[inset_0_-1px_0_0_hsla(0,0%,100%,.1)]">
       <div className="px-4 lg:px-6 flex items-center justify-between w-full">
         <div>
           <MainLogo size={ 36 } isLink />
@@ -60,7 +60,7 @@ const Header = () => {
                   </Button>
                 )
                 : ( user 
-                  ? <UserMenu user={ user } />
+                  ? <UserMenu />
                   : <Button 
                     width="w-[36px]" 
                     height="h-[36px]" 

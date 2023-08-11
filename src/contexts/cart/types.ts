@@ -24,7 +24,7 @@ export interface CartItem extends Book {
 
 export type CartActionType =
   | { type: '[CART] - LOAD FROM COOKIES', payload: CartItem[] }
-  | { type: '[CART] - ADD TO CART', payload: Partial<CartItem> }
+  | { type: '[CART] - ADD TO CART', payload: CartItem }
   | { type: '[CART] - REMOVE FROM CART', payload: CartItem[] }
   | { type: '[CART] - UPDATE PRODUCT CART QUANTITY', payload: CartItem[] }
   | { type: '[CART] - UPDATE ORDER SUMMARY', payload: number }

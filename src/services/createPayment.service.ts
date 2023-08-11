@@ -2,26 +2,33 @@ import axios, { AxiosError } from 'axios';
 import { config } from '@/config';
 import { CartItem } from '@/contexts/cart';
 
-export const createPayment = async (items: CartItem[]) => {
+interface ApiResponse {
+  data: {
+    payment_url: string;
+  }
+}
+
+export const createPayment = async (items: CartItem[], accessToken: string) => {
   const { BASE_API_URL } = config;
-  axios.defaults.withCredentials = true;
 
   try {
-    const { data } = await axios.post(`${BASE_API_URL}/payments`, {      
-      data: {
-        items: items.map(({ id, title, image, description, quantity, price }) => ({
-          id: id,
-          title: title,
-          currency_id: 'ARS',
-          picture_url: image,
-          description: description,
-          quantity: quantity,
-          unit_price: price
-        })),
-      },
+    const { data } = await axios.post<ApiResponse>(`${BASE_API_URL}/payments`, {      
+      items: items.map(({ id, title, image, description, quantity, price }) => ({
+        id: id,
+        title: title,
+        currency_id: 'ARS',
+        picture_url: image,
+        description: description,
+        quantity: quantity,
+        unit_price: price
+      })),
+    }, {
+      headers: {
+        Authorization: `Bearer ${accessToken}`
+      }
     });
     
-    return { data };
+    return { url: data.data.payment_url };
   } catch (error) {
     if (error instanceof AxiosError) {
       console.log(error.request.status);

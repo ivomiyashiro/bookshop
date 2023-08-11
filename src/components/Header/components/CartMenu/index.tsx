@@ -1,5 +1,6 @@
 import { useContext, useState } from 'react';
 import { useRouter } from 'next/navigation';
+import Cookies from 'js-cookie';
 import { XMarkIcon } from '@heroicons/react/24/solid';
 
 import { createPayment } from '@/services';
@@ -19,9 +20,18 @@ const CartMenu = ({ open, handleOpen }: Props) => {
   const router = useRouter();
 
   const handleCheckout = async () => {
+    const at = Cookies.get('ACCESS_TOKEN');
+
     try {
+      if (!at) throw new Error('Unauthorized'); 
+      
       setLoading(true);
-      const { data } = await createPayment(cart);
+
+      const { url } = await createPayment(cart, at);
+
+      Cookies.remove('CART');
+      location.href = url;
+
     } catch (error) {
       if (error instanceof Error) {
         if (error.message === 'Unauthorized') {

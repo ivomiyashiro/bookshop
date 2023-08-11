@@ -63,7 +63,7 @@ export const CartProvider = ({ children, initialCart }: { children: React.ReactN
       });
     };
 
-    dispatch({ type: '[CART] - ADD TO CART', payload: book });
+    dispatch({ type: '[CART] - ADD TO CART', payload: book as CartItem });
   };
 
   const removeFromCart = (id: number) => (
