@@ -3,7 +3,6 @@ import { useRouter } from 'next/navigation';
 import { AuthContext } from '@/contexts/auth';
 
 export const useSigninForm = () => {
-
   const { signup } = useContext(AuthContext);
 
   const [nameValue, setNameValue] = useState('');
@@ -31,14 +30,24 @@ export const useSigninForm = () => {
     }
 
     setLoading(true);
-    const { error: apiError } = await signup(nameValue, emailValue, passwordValue);
-    setLoading(false);
+    try {
+      await signup({ 
+        name: nameValue, 
+        email: emailValue, 
+        password: passwordValue 
+      });
 
-    if (apiError) return setError(`* ${apiError.replace(/^Error:\s*/, '')}`);
-
-    setError('');
-
-    router.replace('/');
+      setError('');
+  
+      router.push('/login');
+    } catch (error) {
+      if (error instanceof Error) {
+        setError('* ' + error.message);
+      }
+      
+    } finally {
+      setLoading(false);
+    }
   };
 
   return {

@@ -3,77 +3,130 @@ import { useReducer, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
 import Cookies from 'js-cookie';
 
-import { loginWithCredentials, signupWithCredentials } from '@/services';
+import { User } from '@/interfaces';
+import { checkRefreshToken, loginWithCredentials, logoutUser, signupWithCredentials } from '@/services';
 
 import { AuthContext, authReducer } from './';
 
 const AuthProvider = ({ children }: { children: React.ReactNode }) => {
-  const [state, dispatch] = useReducer(authReducer, { user: null });
+  const [state, dispatch] = useReducer(authReducer, { 
+    user: null,
+    loading: true,
+  });
   const router = useRouter();
 
-  // Check if token is valid and login user again
-  // useEffect(() => {
-  //   if (!Cookies.get('token')) return;
+  // Check if refresh_token is valid and login user
+  useEffect(() => {
+    const rt = Cookies.get('REFRESH_TOKEN') as string;
 
-  //   const token = Cookies.get('token') || '';
+    const checkRefreshTokenInCookies = async () => {
+      try {
+        const { data } = await checkRefreshToken(rt);
+        const { tokens, user } = data;
+  
+        if (data) {
+          saveTokensAndLogin(user, tokens);
+        }
+      } catch (error) {
+        removeTokensAndLogout();
 
-  //   checkToken(token)
-  //     .then((user) => {
+      } finally {
+        dispatch({
+          type: '[AUTH] - Loading',
+          payload: false
+        });
+      }
+    };
 
-  //       dispatch({
-  //         type: '[AUTH] - Login',
-  //         payload: user
-  //       });
-  //     })
-  //     .catch(error => {
-  //       console.log(error);
-
-  //       Cookies.remove('token');
-  //       dispatch({ type: '[AUTH] - Signout' });
-  //     });
-  // }, []);
-
-  const login = async (email: string, password: string) => {
-    try {
-      const user = await loginWithCredentials(email, password);
-
-      if (!user) return null;
-
-      dispatch({
-        type: '[AUTH] - Login',
-        payload: user
+    if (!rt) {
+      return dispatch({
+        type: '[AUTH] - Loading',
+        payload: false
       });
+    }
+
+    dispatch({
+      type: '[AUTH] - Loading',
+      payload: true
+    });
+    checkRefreshTokenInCookies();
+
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
+
+  const login = async ({ email, password }: { email: string; password: string }) => {
+    try {
+      const { user, tokens } = await loginWithCredentials({ email, password });
+
+      saveTokensAndLogin(user, tokens);
 
       return user;
 
     } catch (error) {
-      console.log(error);
-
-      return null;
+      if (error instanceof Error) {
+        throw new Error(error.message);
+      }
     }
   };
 
-  const signup = async (name: string, email: string, password: string) => {
+
+  const signup = async ({ name, email, password }: { name: string; email: string; password: string }) => {
     try {
-      const { user } = await signupWithCredentials(name, email, password);
+      const { user } = await signupWithCredentials({ name, email, password });
 
-      dispatch({
-        type: '[AUTH] - Login',
-        payload: user!
-      });
-        
-      return { user };
+      return user;
+
     } catch (error) {
-      return {
-        user: null
-      };
+      if (error instanceof Error) {
+        throw new Error(error.message);
+      }
     }
   };
 
-  const signout = () => {
-    Cookies.remove('token');
+
+  const logout = async () => {
+    const at = Cookies.get('ACCESS_TOKEN');
+
+    try {
+      if (at) {
+        await logoutUser(at);
+      }
+
+    } catch (error) {
+      if (error instanceof Error) {
+        throw new Error(error.message);
+      }
+
+    } finally {
+      removeTokensAndLogout();
+      router.refresh();
+    }
+  };
+
+
+  const saveTokensAndLogin = (
+    user: User,
+    tokens: { 
+      refresh_token: string; 
+      access_token: string; 
+    }, 
+  ) => {
+    Cookies.set('REFRESH_TOKEN', tokens.refresh_token);
+    Cookies.set('ACCESS_TOKEN', tokens.access_token);
+
+    dispatch({
+      type: '[AUTH] - Login',
+      payload: user
+    });
+  };
+
+  
+  const removeTokensAndLogout = () => {
+    Cookies.remove('REFRESH_TOKEN');
+    Cookies.remove('ACCESS_TOKEN');
+
     dispatch({ type: '[AUTH] - Signout' });
-    router.refresh();
   };
 
 
@@ -84,7 +137,7 @@ const AuthProvider = ({ children }: { children: React.ReactNode }) => {
       // Methods
       login,
       signup,
-      signout,
+      logout,
     } }>
       { children }
     </AuthContext.Provider>

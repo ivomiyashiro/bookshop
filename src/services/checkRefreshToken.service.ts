@@ -1,8 +1,10 @@
 import axios, { AxiosError } from 'axios';
 import { config } from '@/config';
+import { User } from '@/interfaces';
 
 interface Response {
   data: {
+    user: User;
     tokens: {
       refresh_token: string;
       access_token: string;
@@ -20,7 +22,12 @@ export const checkRefreshToken = async (refreshToken: string) => {
       }
     });
 
-    return { data: { tokens: data.data.tokens }  };
+    return { 
+      data: { 
+        user: data.data.user, 
+        tokens: data.data.tokens 
+      } 
+    };
   } catch (error) {
     if (error instanceof AxiosError) {
       throw new Error(error.response?.data.message);

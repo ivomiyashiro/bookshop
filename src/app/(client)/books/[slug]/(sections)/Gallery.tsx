@@ -17,6 +17,7 @@ const Gallery = ({ image, altText }: Props) => {
                 src={ image }
                 alt={ altText }
                 sizes="(min-width: 768px) 750px, 19vw"
+                priority={ true }
                 fill
               />
             )

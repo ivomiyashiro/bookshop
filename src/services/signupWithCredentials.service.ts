@@ -2,24 +2,37 @@ import axios, { AxiosError } from 'axios';
 import { config } from '@/config';
 import { User } from '@/interfaces';
 
-export const signupWithCredentials = async (
-  name: string, 
-  email: string, 
-  password: string
-): Promise<{ user: User | null }> => {
+interface Props {
+  name: string;
+  email: string;
+  password: string;
+}
+
+interface ServiceReturn {
+  user: User;
+}
+
+interface ApiLoginResponse {
+  data: ServiceReturn;
+}
+
+export const signupWithCredentials = async ({
+  name,
+  email,
+  password,
+}: Props): Promise<ServiceReturn> => {
   const { BASE_API_URL } = config;
 
   try {
-    const { data } = await axios.post(`${BASE_API_URL}/auth/local/signup`, {
+    const { data } = await axios.post<ApiLoginResponse>(`${BASE_API_URL}/auth/local/signup`, {
       name,
       email,
       password
-    }, {
-      withCredentials: true
     });
-    console.log(data);
-    return { data };
 
+    return { 
+      user: data.data.user,
+    };
   } catch (error) {
     if (error instanceof AxiosError) {
       throw new Error(error.response?.data.message);

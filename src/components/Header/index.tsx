@@ -3,12 +3,14 @@ import { useContext, useState } from 'react';
 import { ShoppingBagIcon, UserIcon, MagnifyingGlassIcon } from '@heroicons/react/24/outline';
 
 import { CartContext } from '@/contexts/cart';
+import { AuthContext } from '@/contexts/auth';
 
-import { MainLogo, Button } from '@/components';
-import { MobileSearchbar, CartMenu } from './components';
+import { MainLogo, Button, Spinner } from '@/components';
+import { MobileSearchbar, CartMenu, UserMenu } from './components';
 
 const Header = () => {
   const { totalProducts } = useContext(CartContext);
+  const { user, loading } = useContext(AuthContext);
   const [searchbarOpen, setSearchbarOpen] = useState(false);
   const [cartMenuOpen, setCartMenuOpen] = useState(false);
 
@@ -46,15 +48,28 @@ const Header = () => {
               ) }
             </li>
             <li className="flex items-center">
-              <Button 
-                width="w-[36px]" 
-                height="h-[36px]" 
-                type="link"
-                href="/login" 
-                style="ALT" 
-              >
-                <UserIcon width={ 22 } height={ 22 } arial-aria-label="Link to auth page" />
-              </Button>
+              { loading
+                ? (
+                  <Button 
+                    width="w-[36px]" 
+                    height="h-[36px]" 
+                    type="button"
+                    style="ALT" 
+                  >
+                    <Spinner width="w-4"/>
+                  </Button>
+                )
+                : ( user 
+                  ? <UserMenu user={ user } />
+                  : <Button 
+                    width="w-[36px]" 
+                    height="h-[36px]" 
+                    type="link"
+                    href="/login" 
+                    style="ALT" 
+                  >
+                    <UserIcon width={ 22 } height={ 22 } arial-aria-label="Link to auth page" />
+                  </Button> ) }
             </li>
           </ul>
         </div>

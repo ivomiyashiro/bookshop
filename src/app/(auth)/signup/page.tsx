@@ -23,12 +23,14 @@ export default function Signup() {
       <Input 
         label="Full name"
         placeholder="Enter your name..."
+        name="name"
         type="text"
         value={ nameValue }
         onChange={ (e: React.ChangeEvent<HTMLInputElement>) => handleNameValue(e.target.value) }
       />
       <Input 
         label="Enter email"
+        name="email"
         placeholder="Enter your email..."
         type="email"
         value={ emailValue }
@@ -36,6 +38,7 @@ export default function Signup() {
       />
       <Input 
         label="Password"
+        name="password"
         placeholder="Enter your password..."
         type="password"
         value={ passwordValue }
@@ -51,7 +54,7 @@ export default function Signup() {
           height="h-[42px]"
         >
           { loading
-            ? <Spinner />
+            ? <Spinner width="w-6" />
             : 'Sign up' }
         </Button>
         <Button
@@ -60,7 +63,7 @@ export default function Signup() {
           height="h-[42px]"
           href={ `${BASE_API_URL}/auth/provider/google/callback` }
         >
-          Sign up with Google
+            Sign up with Google
         </Button>
       </div>
     </form>

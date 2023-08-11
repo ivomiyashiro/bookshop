@@ -25,13 +25,23 @@ export const useLoginForm = () => {
     }
 
     setLoading(true);
-    const user = await login(emailValue, passwordValue);
+    try {
+      await login({ 
+        email: emailValue, 
+        password: passwordValue 
+      });
 
-    if (!user) return setError(error);
+      setError('');
 
-    setError('');
+      router.refresh();
 
-    router.refresh();
+    } catch (error) {
+      if (error instanceof Error) {
+        setError('* ' + error.message);
+      }
+    } finally {
+      setLoading(false);
+    }
   };
 
   return {

@@ -1,4 +1,4 @@
-import React from 'react';
+import Link from 'next/link';
 
 interface Props {
   items: {
@@ -20,9 +20,9 @@ const Breadcrumbs = ({ items }: Props) => {
                 </svg>
               ) }
               { item.link ? (
-                <a href={ item.link } className={ `transition ml-1 text-sm font-medium ${index === items.length - 1 ? 'text-gray-500' : 'text-gray-700'} hover:text-pink-600 md:ml-2 ${index === items.length - 1 ? 'dark:text-gray-400' : 'dark:hover:text-white'}` }>
+                <Link href={ item.link } className={ `transition ml-1 text-sm font-medium ${index === items.length - 1 ? 'text-gray-500' : 'text-gray-700'} hover:text-pink-600 md:ml-2 ${index === items.length - 1 ? 'dark:text-gray-400' : 'dark:hover:text-white'}` }>
                   {item.label}
-                </a>
+                </Link>
               ) : (
                 <span className={ `transition ml-1 text-sm font-medium ${index === items.length - 1 ? 'text-gray-500' : 'text-gray-700'} md:ml-2 ${index === items.length - 1 ? 'dark:text-gray-400' : 'dark:hover:text-white'}` }>
                   {item.label}

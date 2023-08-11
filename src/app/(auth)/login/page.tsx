@@ -22,6 +22,7 @@ export default function Login() {
         label="Enter email"
         placeholder="Enter your email..."
         type="email"
+        name="email"
         value={ emailValue }
         onChange={ (e: React.ChangeEvent<HTMLInputElement>) => handleEmailValue(e.target.value) }
       />
@@ -29,6 +30,7 @@ export default function Login() {
         label="Password"
         placeholder="Enter your password..."
         type="password"
+        name="password"
         value={ passwordValue }
         onChange={ (e: React.ChangeEvent<HTMLInputElement>) => handlePasswordValue(e.target.value) }
       />
@@ -42,7 +44,7 @@ export default function Login() {
           height="h-[42px]"
         >
           { loading
-            ? <Spinner />
+            ? <Spinner width="w-6" />
             : 'Log in' }
         </Button>
         <Button

@@ -16,7 +16,7 @@ export default async function AuthLayout({
     <AuthContainer>
       <main className="flex justify-center h-screen">
         <section 
-          className="w-[85%] hidden lg:flex h-full bg-red-500 bg-cover bg-center items-center lg:p-[2em] xl:p-[4em]" 
+          className="w-[85%] hidden lg:flex h-full bg-gray-700 bg-cover bg-center items-center lg:p-[2em] xl:p-[4em]" 
           style={ {
             backgroundImage: 'url(\'https://images.unsplash.com/photo-1580537659466-0a9bfa916a54?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=774&q=80\')'
           } }

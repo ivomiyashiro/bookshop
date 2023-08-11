@@ -36,7 +36,7 @@ const CartMenu = ({ open, handleOpen }: Props) => {
 
   return (
     <Modal open={ open } handleOpen={ () => handleOpen(false) }>
-      <aside className={ `fixed top-0 w-full md:w-[470px] right-0 h-screen bg-gray-900 shadow-[0_35px_60px_-15px_rgba(0,0,0,.5)] z-50 transition-all overflow-hidden ${ open ? 'translate-x-0' : 'translate-x-[100%]' }` }>
+      <aside className={ `fixed top-0 w-full md:w-[470px] right-0 h-screen bg-gray-900 shadow-[0_35px_60px_-15px_rgba(0,0,0,.5)] z-50 md:rounded-l-2xl transition-all overflow-hidden ${ open ? 'translate-x-0' : 'translate-x-[100%]' }` }>
         <div className="flex flex-col h-full relative">
           <div className="p-4 shadow flex items-center justify-between">
             <h2 className="font-bold text-3xl">YOUR CART</h2>

@@ -1,36 +1,14 @@
 'use client';
-import { useEffect, useState } from 'react';
+import { useContext } from 'react';
 import { useRouter } from 'next/navigation';
-import Cookies from 'js-cookie';
 
-import { checkRefreshToken } from '@/services';
+import { AuthContext } from '@/contexts/auth';
+
 import { Spinner } from '@/components';
 
 const AuthContainer = ({ children }: { children: React.ReactNode }) => {
+  const { user, loading } = useContext(AuthContext);
   const router = useRouter();
-  const [loading, setLoading] = useState(true);
-
-  useEffect(() => {
-    const rt = Cookies.get('REFRESH_TOKEN') as string;
-
-    const checkRefreshTokenInCookies = async () => {
-      const { data } = await checkRefreshToken(rt);
-
-      if (data) {
-        Cookies.set('REFRESH_TOKEN', data.tokens.refresh_token);
-        Cookies.set('ACCESS_TOKEN', data.tokens.access_token);
-
-        return router.push('/');
-      }
-    };
-
-    if (!rt) {
-      return setLoading(false);
-    }
-
-    setLoading(true);
-    checkRefreshTokenInCookies();
-  }, [router]);
 
   if (loading) {
     return (
@@ -38,6 +16,11 @@ const AuthContainer = ({ children }: { children: React.ReactNode }) => {
         <Spinner width="w-20"/> 
       </div>
     );
+  } 
+  
+  if (user) {
+    router.push('/'); 
+    return null;
   }
 
   return <> { children } </>;

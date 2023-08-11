@@ -6,11 +6,21 @@ interface Props {
   type: string;
   label: string;
   maxLength?: number;
+  name?: string;
   onChange?: (e: React.ChangeEvent<HTMLInputElement>) => void;
   onKeyDown?: (e: React.KeyboardEvent<HTMLInputElement>) => void;
 }
 
-const Input = ({ value, placeholder, type, label, maxLength, onChange, onKeyDown }: Props) => {
+const Input = ({ 
+  value, 
+  placeholder, 
+  type, 
+  label, 
+  maxLength, 
+  name = '',
+  onChange, 
+  onKeyDown 
+}: Props) => {
   const id = useId();
 
   return (
@@ -21,10 +31,10 @@ const Input = ({ value, placeholder, type, label, maxLength, onChange, onKeyDown
           className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
         >
           { label }
-        </label>
-      )}
+        </label> )}
       <input 
         type={ type }
+        name={ name }
         id={ id }
         value={ value }
         placeholder={ placeholder }
