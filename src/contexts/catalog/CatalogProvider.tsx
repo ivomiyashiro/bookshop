@@ -113,8 +113,8 @@ const CatalogProvider: FC<CatalogProviderProps> = ({ children, data }) => {
     const { page, totalPages } = state.pagination;
 
     if (page < totalPages) {
-      const currentPage = (state.params.page || 0) + 1;
-      const { books, pagination } = await getStorefrontBooks({ page: currentPage });
+      const nextPage = (state.params.page || 0) + 1;
+      const { books, pagination } = await getStorefrontBooks({ page: nextPage });
 
       dispatch({
         type: '[CATALOG] - LOAD BOOKS',

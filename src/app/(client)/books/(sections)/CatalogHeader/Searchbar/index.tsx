@@ -4,7 +4,14 @@ import { useSearchbar } from '@/hooks';
 import { Button } from '@/components';
 
 const Searchbar = () => {
-  const { id, inputRef, inputValue, handleInputChange, handleSubmit, handleResetInputValue } = useSearchbar(null);
+  const { 
+    id, 
+    inputRef, 
+    inputValue, 
+    handleInputChange, 
+    handleSubmit, 
+    handleResetInputValue 
+  } = useSearchbar(null);
 
   return (  
     <form className="hidden md:block w-full" onSubmit={ handleSubmit }>

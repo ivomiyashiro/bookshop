@@ -9,6 +9,18 @@ export interface GetStorefrontBooksParams {
   price?: string;
 }
 
+export interface GetStorefrontOrdersParams {
+  limit?: number;
+  page?: number;
+  orderBy?: BooksOrderBy;
+  sortBy?: BooksSortBy;
+  searchText?: string;
+  price?: string;
+  status?: OrderStatus;
+}
+
+export type OrderStatus = 'PENDING' | 'PAID';
+
 export type BooksOrderBy = 'title' | 'createdAt' | 'price';
 
 export type BooksSortBy = 'asc' | 'desc';

@@ -14,7 +14,7 @@ export const metadata: Metadata = {
   description: 'Here you will find our list of books available.',
 };
 
-export default async function Home({ searchParams }: {
+export default async function Books({ searchParams }: {
   searchParams: GetStorefrontBooksParams;
 }) {
   const { authors: authorsParams, languages: languagesParams, price: priceParams, searchText, sortBy, orderBy } = searchParams;

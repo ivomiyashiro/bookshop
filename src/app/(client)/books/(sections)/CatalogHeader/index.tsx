@@ -1,5 +1,5 @@
 'use client';
-import { ChangeEvent, useContext, useState } from 'react';
+import { useContext, useState } from 'react';
 import { ArrowsUpDownIcon, FunnelIcon } from '@heroicons/react/24/outline';
 
 import { SortValues } from '@/interfaces';
@@ -28,7 +28,7 @@ const CatalogHeader = () => {
         <InputSelect
           icon={ <ArrowsUpDownIcon width={ 24 } height={ 24 } /> }
           values={ BOOKS_SORTING_VALUES }
-          onChange={ (e: ChangeEvent<HTMLSelectElement>) => sortBooks(e.target.value as SortValues) }
+          onChange={ (e: React.ChangeEvent<HTMLSelectElement>) => sortBooks(e.target.value as SortValues) }
         />
         <Button style="PRIMARY" onClick={ () => setFiltersMenuOpen(true) }>
           <div className="flex items-center gap-2">

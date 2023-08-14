@@ -8,3 +8,4 @@ export * from './loginWithCredentials.service';
 export * from './signupWithCredentials.service';
 export * from './checkRefreshToken.service';
 export * from './logoutUser.service';
+export * from './getUserOrders.service';
