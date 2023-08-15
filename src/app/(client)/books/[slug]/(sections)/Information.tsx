@@ -29,12 +29,12 @@ const Information = ({ book }: Props) => {
     loadBook();
     setLoading(false);
   }, [book.id]);
-  console.log(loading);
+
   return (
     <div className="md:w-full">
       <h1 className="text-2xl md:text-3xl lg:text-4xl font-bold !leading-[1.35em]">{ book.title }</h1>
       <p className="text-sm mt-2 text-gray-400">
-      By: 
+        By: 
         { book.authors.map(author => (
           <span key={ author.id } className="after:content-[','] after:last:content-['']"> { author.name } </span>
         ))}
@@ -49,7 +49,7 @@ const Information = ({ book }: Props) => {
           ? <div className="min-w-[140px] h-[55px] dark:bg-gray-700 bg-gray-200 rounded-lg pulse"></div>
           : ( <InputSelect
             selectedValue={ quantity }
-            values={ Array.from(Array(stock), (_, index) => index + 1) }
+            values={ Array.from(Array(5), (_, index) => index + 1) }
             icon={ <p className="font-semibold">QTY</p> }
             onChange={ (e: React.ChangeEvent<HTMLSelectElement>) => setQuantity(parseInt(e.target.value)) }
           /> ) }
