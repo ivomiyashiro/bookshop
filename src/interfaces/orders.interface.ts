@@ -1,7 +1,7 @@
 export interface Order {
   id:         number;
   totalPrice: number;
-  status:     string;
+  status:     OrderStatus;
   createdAt:  Date;
   updatedAt:  Date;
   customerId: number;
@@ -19,3 +19,5 @@ export interface OrderItem {
   bookId:   number;
   orderId:  number;
 }
+
+export type OrderStatus = 'PAID' | 'CANCELLED' | 'PENDING'

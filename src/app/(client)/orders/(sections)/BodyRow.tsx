@@ -27,8 +27,10 @@ export const BodyRow = ({ order }: Props) => {
         </div>
       </TableCell>
       <TableCell>
-        <Chip>
-          Paid
+        <Chip color={ order.status === 'PAID' ? 'GREEN' : 'RED' }>
+          <span className="capitalize">
+            { order.status.toLocaleLowerCase() }
+          </span>
         </Chip>
       </TableCell>
       <TableCell>
@@ -39,6 +41,7 @@ export const BodyRow = ({ order }: Props) => {
             href={ `/orders/${ order.id }` }
             width="w-[110px]"
             height="h-[30px]"
+            className="!rounded"
           >
             See Details
           </Button>
