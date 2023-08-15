@@ -1,5 +1,6 @@
 import { Metadata } from 'next';
 import { cookies } from 'next/headers';
+import { HomeIcon } from '@heroicons/react/24/solid';
 
 import { 
   DEFAULT_ORDERS_ORDER_BY, 
@@ -11,7 +12,7 @@ import {
 import { getUserOrders } from '@/services';
 
 import { HeaderCols, BodyRow, Pagination } from './(sections)';
-import { Table, TableBody, TableHeader, TableRow } from '@/components';
+import { Breadcrumbs, Table, TableBody, TableHeader, TableRow } from '@/components';
 
 export const metadata: Metadata = {
   title: 'My Orders | Bookshop',
@@ -37,25 +38,34 @@ export default async function Orders({ searchParams }: {
 
   return (
     <>
-      <Table>
-        <TableHeader>
-          <TableRow>
-            <HeaderCols />
-          </TableRow>
-        </TableHeader>
-        <TableBody>
-          { orders.map(order => ( 
-            <BodyRow key={ order.id } order={ order } /> 
-          )) }
-        </TableBody>
-      </Table>
-      <Pagination
-        name="Orders"
-        count={ pagination.totalCount }
-        currentPage={ pagination.page }
-        totalPages={ pagination.totalPages }
-        page={ pagination.page }
-      />
+      <section className="flex items-center">
+        <HomeIcon width={ 18 } height={ 18 } className="hidden md:flex text-gray-500" />
+        <Breadcrumbs items={ [
+          { label: 'Home', link: '/' },
+          { label: 'Orders', link: '/orders' },
+        ] } />
+      </section>
+      <section className="mt-6">
+        <Table>
+          <TableHeader>
+            <TableRow>
+              <HeaderCols />
+            </TableRow>
+          </TableHeader>
+          <TableBody>
+            { orders.map(order => ( 
+              <BodyRow key={ order.id } order={ order } /> 
+            )) }
+          </TableBody>
+        </Table>
+        <Pagination
+          name="Orders"
+          count={ pagination.totalCount }
+          currentPage={ pagination.page }
+          totalPages={ pagination.totalPages }
+          page={ pagination.page }
+        />
+      </section>
     </>
   );
 }

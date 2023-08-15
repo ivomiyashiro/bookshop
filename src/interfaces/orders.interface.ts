@@ -1,3 +1,5 @@
+import { Book } from './books.interface';
+
 export interface Order {
   id:         number;
   totalPrice: number;
@@ -18,6 +20,7 @@ export interface OrderItem {
   price:    number;
   bookId:   number;
   orderId:  number;
+  book: Book;
 }
 
 export type OrderStatus = 'PAID' | 'CANCELLED' | 'PENDING'

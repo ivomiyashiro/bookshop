@@ -28,10 +28,8 @@ export default async function Books({ searchParams }: {
 
   return (
     <CatalogProvider data={ { books, params, pagination, languages, authors } }>
-      <div className="max-w-[1340px] mx-auto">
-        <CatalogHeader />
-        <Catalog />
-      </div>
+      <CatalogHeader />
+      <Catalog />
     </CatalogProvider>
   );
 }

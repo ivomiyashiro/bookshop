@@ -9,3 +9,4 @@ export * from './signupWithCredentials.service';
 export * from './checkRefreshToken.service';
 export * from './logoutUser.service';
 export * from './getUserOrders.service';
+export * from './getOrderById.service';

@@ -27,13 +27,13 @@ const ProductCard = ({ book }: { book: Book }) => {
           <h4 className="leading-[1.3em] text-[0.925rem]">{ book.title }</h4>
         </Link>
         <p className="text-gray-400 text-sm my-1">
-          { book.authors.map((author, i) => {
+          { book.authors.map((author, _i) => {
             return (
               <span key={ author.id } className="after:content-['·'] after:last:content-['']"> { author.name } </span>
             );
           }) }
         </p>
-        <p className="font-semibold">${ book.price }</p>
+        <p className="font-semibold">$ { book.price }</p>
       </div>
     </article>
   );

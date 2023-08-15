@@ -16,23 +16,22 @@ export const CartItem = ({ book, handleCloseModal }: Props) => {
 
   return (
     <article className="flex relative w-full overflow-visible">
-      <div className="relative block w-[8rem] max-h-[10rem] min-h-[10rem] lg:w-[10rem] lg:max-h-[12.5rem] lg:min-h-[12.5rem] mr-4 rounded-lg overflow-hidden dark:bg-gray-700 bg-gray-200">
-        { book.image 
-          ? (<Link href={ `/books/${ book.slug }` } className="block" onClick={ handleCloseModal }>
-            <Image 
+      <Link href={ `/books/${ book.slug }` } className="block" onClick={ handleCloseModal }>
+        <div className="relative block w-[8rem] max-h-[10rem] min-h-[10rem] lg:w-[10rem] lg:max-h-[12.5rem] lg:min-h-[12.5rem] mr-4 rounded-lg overflow-hidden dark:bg-gray-700 bg-gray-200">
+          { book.image 
+            ? ( <Image 
               src={ book.image }
               alt={ book.title }
               sizes="(min-width: 768px) 12.4rem, 10rem"
               fill
-            />
-          </Link> ) 
-          : ( <div className="bg-gray-300">
-            <DefaultImage className="w-[40px]"/>
-          </div>
-          )
-        }
-        
-      </div>
+            /> ) 
+            : ( <div className="bg-gray-300">
+              <DefaultImage className="w-[40px]"/>
+            </div>
+            )
+          }
+        </div>
+      </Link> 
       <div className="flex-[1_1] flex flex-col gap-1 w-full">
         <Link href={ `/books/${ book.slug }` } onClick={ handleCloseModal }>
           <p>{ book.title }</p>

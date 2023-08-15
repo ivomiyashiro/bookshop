@@ -16,7 +16,7 @@ export default async function Book({ params }: {
   return (
     <div className="max-w-[1200px] mx-auto">
       <section className="flex justify-between">
-        <div className="flex items-center ">
+        <div className="flex items-center">
           <HomeIcon width={ 18 } height={ 18 } className="hidden md:flex text-gray-500" />
           <Breadcrumbs items={ [
             { label: 'Home', link: '/' },

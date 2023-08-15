@@ -1,10 +1,19 @@
-import { Table, TableBody, TableCell, TableHeader, TableRow } from '@/components';
+import { HomeIcon } from '@heroicons/react/24/solid';
+
 import { HeaderCols } from './(sections)';
+import { Breadcrumbs, Table, TableBody, TableCell, TableHeader, TableRow } from '@/components';
 
 export default function Loading() {
   return (
     <>
-      <Table>
+      <div className="flex items-center">
+        <HomeIcon width={ 18 } height={ 18 } className="hidden md:flex text-gray-500" />
+        <Breadcrumbs items={ [
+          { label: 'Home', link: '/' },
+          { label: 'Orders', link: '/orders' }
+        ] } />
+      </div>
+      <Table className="mt-6">
         <TableHeader>
           <TableRow>
             <HeaderCols />
@@ -14,22 +23,22 @@ export default function Loading() {
           { Array(12).fill(null).map((_value, i) => ( 
             <TableRow key={ i } className="animate-pulse bg-white border-b dark:bg-gray-800 dark:border-gray-700">
               <TableCell>
-                <div className="animate-skeleton-loading rounded-lg h-6 dark:bg-gray-700 bg-gray-200"></div>
+                <div className="rounded-lg h-6 dark:bg-gray-700 bg-gray-200"></div>
               </TableCell>
               <TableCell>
-                <div className="animate-skeleton-loading rounded-lg h-6 dark:bg-gray-700 bg-gray-200"></div>
+                <div className="rounded-lg h-6 dark:bg-gray-700 bg-gray-200"></div>
               </TableCell>
               <TableCell>
-                <div className="animate-skeleton-loading rounded-lg h-6 dark:bg-gray-700 bg-gray-200"></div>
+                <div className="rounded-lg h-6 dark:bg-gray-700 bg-gray-200"></div>
               </TableCell>
               <TableCell>
-                <div className="animate-skeleton-loading rounded-lg h-6 dark:bg-gray-700 bg-gray-200"></div>
+                <div className="rounded-lg h-6 dark:bg-gray-700 bg-gray-200"></div>
               </TableCell>
               <TableCell>
-                <div className="animate-skeleton-loading rounded-lg h-6 dark:bg-gray-700 bg-gray-200"></div>
+                <div className="rounded-lg h-6 dark:bg-gray-700 bg-gray-200"></div>
               </TableCell>
               <TableCell>
-                <div className="animate-skeleton-loading rounded-lg h-6 dark:bg-gray-700 bg-gray-200"></div>
+                <div className="rounded-lg h-6 dark:bg-gray-700 bg-gray-200"></div>
               </TableCell>
             </TableRow>
           )) }

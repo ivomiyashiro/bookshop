@@ -2,10 +2,11 @@
 interface Props {
   children: React.ReactNode;
   color: 'GREEN' | 'RED';
+  className?: string;
 }
 
-const Chip = ({ children, color }: Props) => {
-  const communStyles = 'text-sm font-medium mr-2 px-2.5 py-0.5 rounded';
+const Chip = ({ children, color, className }: Props) => {
+  const communStyles = `text-sm font-medium mr-2 px-2.5 py-0.5 rounded ${ className }`;
 
   if (color === 'GREEN') {
     return (

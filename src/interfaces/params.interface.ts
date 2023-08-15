@@ -19,7 +19,7 @@ export interface GetStorefrontOrdersParams {
   status?: OrderStatus;
 }
 
-export type OrderStatus = 'PENDING' | 'PAID';
+export type OrderStatus = 'PENDING' | 'PAID' | 'CANCELLED';
 
 export type BooksOrderBy = 'title' | 'createdAt' | 'price';
 

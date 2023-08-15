@@ -22,8 +22,6 @@ export default function BookPageLayout({
   children: React.ReactNode
 }) {
   return (
-    <>
-      { children }
-    </>
+    <> { children } </>
   );
 }
