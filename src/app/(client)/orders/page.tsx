@@ -33,14 +33,10 @@ export default async function Orders({ searchParams }: {
   } = searchParams;
   const params = { price: priceParams, status, searchText, sortBy, orderBy, page, limit, offset };
   const at = cookies().get('ACCESS_TOKEN')?.value as string;
-
   const { orders, pagination } = await getUserOrders(params, at);
 
   return (
-    <section>
-      <h1 className="text-5xl font-bold mb-6">
-        MY ORDERS
-      </h1>
+    <>
       <Table>
         <TableHeader>
           <TableRow>
@@ -48,22 +44,18 @@ export default async function Orders({ searchParams }: {
           </TableRow>
         </TableHeader>
         <TableBody>
-          { false
-            ? ( new Array(12).fill(null).map((_row, i) => ( 
-              'hola'
-            )) )
-            : ( orders.map(order => ( 
-              <BodyRow key={ order.id } order={ order } /> 
-            )) ) }
+          { orders.map(order => ( 
+            <BodyRow key={ order.id } order={ order } /> 
+          )) }
         </TableBody>
       </Table>
-      <Pagination 
+      <Pagination
         name="Orders"
         count={ pagination.totalCount }
         currentPage={ pagination.page }
         totalPages={ pagination.totalPages }
         page={ pagination.page }
       />
-    </section>
+    </>
   );
 }
