@@ -28,8 +28,7 @@ export const CartItem = ({ book, handleCloseModal }: Props) => {
             : ( <div className="bg-gray-300">
               <DefaultImage className="w-[40px]"/>
             </div>
-            )
-          }
+            ) }
         </div>
       </Link> 
       <div className="flex-[1_1] flex flex-col gap-1 w-full">
@@ -37,18 +36,16 @@ export const CartItem = ({ book, handleCloseModal }: Props) => {
           <p>{ book.title }</p>
         </Link>
         <p className="text-gray-400 text-sm my-1">
-          { book.authors.map((author, i) => {
-            return (
-              <span key={ author.id } className="after:content-['·'] after:last:content-['']"> { author.name } </span>
-            );
-          }) }
+          { book.authors.map((author) => (
+            <span key={ author.id } className="after:content-['·'] after:last:content-['']"> { author.name } </span>
+          )) }
         </p>
         <p className="font-semibold">${ book.price }</p>
-        <div className="mt-auto flex justify-between items-center gap-2">
+        <div className="mt-auto flex justify-between items-center gap-3">
           <Button
             style="ALT"
             height="h-full"
-            width="w-[40px]"
+            width="w-[50px]"
             onClick={ () => removeFromCart(book.id) }
           >
             <TrashIcon width={ 20 } height={ 20 }/>
@@ -57,6 +54,7 @@ export const CartItem = ({ book, handleCloseModal }: Props) => {
             values={ CART_MAX_QTY }
             selectedValue={ book.quantity }
             icon={ <p className="font-semibold">QTY</p> }
+            className="!w-full"
             onChange={ (e: React.ChangeEvent<HTMLSelectElement>) => updateProductQuantity({ ...book, quantity: parseInt(e.target.value) }) }
           />
         </div>
