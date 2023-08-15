@@ -6,6 +6,7 @@ interface Props {
   values: string[] | number[];
   label?: string;
   selectedValue?: number | string;
+  className?: string;
   onChange: (e: React.ChangeEvent<HTMLSelectElement>) => void;
 }
 
@@ -14,7 +15,8 @@ const InputSelect = ({
   selectedValue, 
   values, 
   label, 
-  onChange 
+  className,
+  onChange
 }: Props) => {
   const id = useId();
 
@@ -25,7 +27,7 @@ const InputSelect = ({
           { label }
         </label>
       ) }
-      <div className="flex items-center gap-1 bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg w-full md:w-[200px] focus:ring-pink-500 focus:border-pink-500 px-5 py-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-pink-500 dark:focus:border-pink-500">
+      <div className={ `flex items-center gap-1 bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg w-full md:w-[200px] focus:ring-pink-500 focus:border-pink-500 px-5 py-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-pink-500 dark:focus:border-pink-500 ${className}` }>
         { Icon && Icon }
         <select 
           id={ id } 
