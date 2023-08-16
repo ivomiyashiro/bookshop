@@ -1,12 +1,12 @@
 import { Metadata } from 'next';
-import { cookies } from 'next/headers';
+import { cookies, headers } from 'next/headers';
+import { redirect } from 'next/navigation';
 import { HomeIcon } from '@heroicons/react/24/solid';
 
 import { getOrderById } from '@/services';
 
 import { OrderItems, OrderInformation } from './(sections)';
 import { Breadcrumbs } from '@/components';
-import { redirect } from 'next/navigation';
 
 export async function generateMetadata({ params }: {
   params: { id: string }
@@ -24,6 +24,7 @@ export async function generateMetadata({ params }: {
 
 export default async function Order({ params }: { params: { id: string }}) {
   const at = cookies().get('ACCESS_TOKEN')?.value as string;
+  const backUrl =  headers().get('x-invoke-path');
 
   try {
     const { order } = await getOrderById(Number(params.id), at);
@@ -52,7 +53,7 @@ export default async function Order({ params }: { params: { id: string }}) {
       </>
     );
   } catch (error) {
-    redirect('/login');
+    redirect(`/login?backUrl=${ backUrl }`);
   }
 
 }

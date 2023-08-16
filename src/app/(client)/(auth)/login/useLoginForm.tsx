@@ -32,6 +32,7 @@ export const useLoginForm = () => {
     }
 
     setLoading(true);
+
     try {
       await login({ 
         email: emailValue, 
@@ -39,18 +40,6 @@ export const useLoginForm = () => {
       });
 
       setError('');
-
-      const at = Cookies.get('ACCESS_TOKEN') as string;
-
-      if (!!!params.get('checkout')) {
-        return router.push('/');
-      }
-
-      const { url } = await createPayment(cart, at);
-
-      Cookies.remove('CART');
-      return location.href = url;
-
     } catch (error) {
       setLoading(false);
 

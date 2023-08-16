@@ -1,5 +1,5 @@
-import { Button } from '@/components';
 import { Metadata } from 'next';
+import { Button } from '@/components';
 
 export const metadata: Metadata = {
   title: 'Home | Bookshop',

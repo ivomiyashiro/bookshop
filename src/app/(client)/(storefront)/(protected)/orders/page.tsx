@@ -73,6 +73,6 @@ export default async function Orders({ searchParams }: {
       </>
     );
   } catch (error) {
-    return redirect('/login');
+    return redirect('/login?backUrl=/orders');
   }
 }
