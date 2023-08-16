@@ -12,7 +12,7 @@ import {
 } from '@/constants';
 import { getUserOrders } from '@/services';
 
-import { HeaderCols, BodyRow, Pagination } from './(sections)';
+import { HeaderCols, BodyRow, Pagination } from './(components)';
 import { Breadcrumbs, Table, TableBody, TableHeader, TableRow } from '@/components';
 
 

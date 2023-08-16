@@ -1,6 +1,6 @@
 import type { Metadata } from 'next';
 
-import { NavButtons, AuthContainer } from './(sections)';
+import { NavButtons, AuthContainer } from './(components)';
 import { MainLogo } from '@/components';
 
 export const metadata: Metadata = {

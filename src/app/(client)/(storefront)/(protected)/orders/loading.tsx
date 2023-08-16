@@ -1,6 +1,6 @@
 import { HomeIcon } from '@heroicons/react/24/solid';
 
-import { HeaderCols } from './(sections)';
+import { HeaderCols } from './(components)';
 import { Breadcrumbs, Table, TableBody, TableCell, TableHeader, TableRow } from '@/components';
 
 export default function Loading() {

@@ -7,7 +7,8 @@ import { handleAsyncRequests } from '@/utils';
 
 import { CatalogProvider } from '@/contexts/catalog';
 
-import { Catalog, CatalogHeader } from './(sections)';
+import { Catalog, CatalogHeader } from './(components)';
+import { Breadcrumbs } from '@/components';
 
 export const metadata: Metadata = {
   title: 'Our Catalog | Bookshop',
@@ -28,6 +29,12 @@ export default async function Books({ searchParams }: {
 
   return (
     <CatalogProvider data={ { books, params, pagination, languages, authors } }>
+      <section className="flex justify-between mb-6">
+        <Breadcrumbs items={ [
+          { label: 'Home', link: '/' },
+          { label: 'Books', link: '/books' },
+        ] } />
+      </section>
       <CatalogHeader />
       <Catalog />
     </CatalogProvider>

@@ -15,3 +15,4 @@ export { default as Input } from './Input';
 export * from './Table';
 export { default as Checkbox } from './Checkbox';
 export { default as Chip } from './Chip';
+export { default as GithubLogo } from './GitLogo';

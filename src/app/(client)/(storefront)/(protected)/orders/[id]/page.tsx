@@ -5,7 +5,7 @@ import { HomeIcon } from '@heroicons/react/24/solid';
 
 import { getOrderById } from '@/services';
 
-import { OrderItems, OrderInformation } from './(sections)';
+import { OrderItems, OrderInformation } from './(components)';
 import { Breadcrumbs } from '@/components';
 
 export async function generateMetadata({ params }: {
