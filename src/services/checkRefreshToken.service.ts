@@ -24,10 +24,8 @@ export const checkRefreshToken = async (refreshToken: string) => {
     });
 
     return { 
-      data: { 
-        user: data.data.user, 
-        tokens: data.data.tokens 
-      } 
+      user: data.data.user, 
+      tokens: data.data.tokens 
     };
   } catch (error) {
     if (error instanceof AxiosError) {
