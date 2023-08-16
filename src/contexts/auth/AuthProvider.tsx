@@ -25,12 +25,13 @@ const AuthProvider = ({ children }: { children: React.ReactNode }) => {
     const checkRefreshTokenInCookies = async () => {
       try {
         const { user, tokens } = await checkRefreshToken(rt);
-  
+
         if (user) {
           insertTokensAndLogin(user, tokens);
         }
       } catch (error) {
         removeTokensAndLogout();
+        setKeepRenewing(false);
 
       } finally {
         dispatch({
@@ -51,6 +52,7 @@ const AuthProvider = ({ children }: { children: React.ReactNode }) => {
       type: '[AUTH] - Loading',
       payload: true
     });
+
     checkRefreshTokenInCookies();
 
   // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -164,8 +166,8 @@ const AuthProvider = ({ children }: { children: React.ReactNode }) => {
 
   
   const removeTokensAndLogout = () => {
-    Cookies.remove('REFRESH_TOKEN');
-    Cookies.remove('ACCESS_TOKEN');
+    // Cookies.remove('REFRESH_TOKEN');
+    // Cookies.remove('ACCESS_TOKEN');
 
     dispatch({ type: '[AUTH] - Signout' });
   };

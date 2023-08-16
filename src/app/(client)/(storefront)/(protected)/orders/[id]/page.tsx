@@ -1,5 +1,5 @@
 import { Metadata } from 'next';
-import { cookies, headers } from 'next/headers';
+import { cookies } from 'next/headers';
 import { redirect } from 'next/navigation';
 import { HomeIcon } from '@heroicons/react/24/solid';
 
@@ -24,10 +24,13 @@ export async function generateMetadata({ params }: {
 
 export default async function Order({ params }: { params: { id: string }}) {
   const at = cookies().get('ACCESS_TOKEN')?.value as string;
-  const backUrl =  headers().get('x-invoke-path');
 
   try {
-    const { order } = await getOrderById(Number(params.id), at);
+    const { order } = await getOrderById(Number(params?.id), at);
+
+    if (!order) {
+      throw new Error('Unauthorized User');
+    }
 
     return (
       <>
@@ -53,7 +56,11 @@ export default async function Order({ params }: { params: { id: string }}) {
       </>
     );
   } catch (error) {
-    redirect(`/login?backUrl=${ backUrl }`);
+    if (error instanceof Error && error.message === 'Unauthorized User') {
+      redirect('/orders');
+    } else {
+      redirect('/login?backUrl=/orders');
+    }
   }
 
 }
