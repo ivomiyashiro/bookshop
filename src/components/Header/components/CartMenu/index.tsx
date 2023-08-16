@@ -29,18 +29,15 @@ const CartMenu = ({ open, handleOpen }: Props) => {
 
       const { url } = await createPayment(cart, at);
 
-      Cookies.remove('CART');
       location.href = url;
 
     } catch (error) {
       if (error instanceof Error) {
         if (error.message === 'Unauthorized') {
           handleOpen(false);
-          router.push('/login?checkout=true');
+          return router.push('/login?checkout=true');
         }
       }
-    } finally {
-      setLoading(false);
     }
   };
 
