@@ -1,7 +1,6 @@
 import { Metadata } from 'next';
 import { cookies } from 'next/headers';
 import { redirect } from 'next/navigation';
-import { HomeIcon } from '@heroicons/react/24/solid';
 
 import { getOrderById } from '@/services';
 
@@ -34,14 +33,11 @@ export default async function Order({ params }: { params: { id: string }}) {
 
     return (
       <>
-        <section className="flex items-center">
-          <HomeIcon width={ 18 } height={ 18 } className="hidden md:flex text-gray-500" />
-          <Breadcrumbs items={ [
-            { label: 'Home', link: '/' },
-            { label: 'Orders', link: '/orders' },
-            { label: `# ${ order.id }`, link: `/orders/${ order.id }` }
-          ] } />
-        </section>
+        <Breadcrumbs items={ [
+          { label: 'Home', link: '/' },
+          { label: 'Orders', link: '/orders' },
+          { label: `# ${ order.id }`, link: `/orders/${ order.id }` }
+        ] } />
         <section className="grid md:grid-cols-[1fr,_350px] gap-5 items-start mt-6">
           <OrderItems 
             orderItems={ order.orderItems }

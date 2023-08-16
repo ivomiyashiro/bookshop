@@ -1,18 +1,13 @@
-import { HomeIcon } from '@heroicons/react/24/solid';
-
 import { HeaderCols } from './(components)';
 import { Breadcrumbs, Table, TableBody, TableCell, TableHeader, TableRow } from '@/components';
 
 export default function Loading() {
   return (
     <>
-      <div className="flex items-center">
-        <HomeIcon width={ 18 } height={ 18 } className="hidden md:flex text-gray-500" />
-        <Breadcrumbs items={ [
-          { label: 'Home', link: '/' },
-          { label: 'Orders', link: '/orders' }
-        ] } />
-      </div>
+      <Breadcrumbs items={ [
+        { label: 'Home', link: '/' },
+        { label: 'Orders', link: '/orders' }
+      ] } />
       <Table className="mt-6">
         <TableHeader>
           <TableRow>

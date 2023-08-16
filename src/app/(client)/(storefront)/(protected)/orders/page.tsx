@@ -1,7 +1,6 @@
 import { Metadata } from 'next';
 import { cookies } from 'next/headers';
 import { redirect } from 'next/navigation';
-import { HomeIcon } from '@heroicons/react/24/solid';
 
 import { 
   DEFAULT_ORDERS_ORDER_BY, 
@@ -42,13 +41,10 @@ export default async function Orders({ searchParams }: {
 
     return (
       <>
-        <section className="flex items-center">
-          <HomeIcon width={ 18 } height={ 18 } className="hidden md:flex text-gray-500" />
-          <Breadcrumbs items={ [
-            { label: 'Home', link: '/' },
-            { label: 'Orders', link: '/orders' },
-          ] } />
-        </section>
+        <Breadcrumbs items={ [
+          { label: 'Home', link: '/' },
+          { label: 'Orders', link: '/orders' },
+        ] } />
         <section className="mt-6">
           <Table>
             <TableHeader>

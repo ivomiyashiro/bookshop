@@ -1,17 +1,13 @@
 import { Breadcrumbs, DefaultImage } from '@/components';
-import { HomeIcon } from '@heroicons/react/24/solid';
 
 export default function Loading() {
   return (
     <>
-      <section className="flex items-center">
-        <HomeIcon width={ 18 } height={ 18 } className="hidden md:flex text-gray-500" />
-        <Breadcrumbs items={ [
-          { label: 'Home', link: '/' },
-          { label: 'Orders', link: '/orders' },
-          { label: '# 0', link: '/orders' }
-        ] } />
-      </section>
+      <Breadcrumbs items={ [
+        { label: 'Home', link: '/' },
+        { label: 'Orders', link: '/orders' },
+        { label: '# 0', link: '/orders' }
+      ] } />
       <section className="grid md:grid-cols-[1fr,_350px] gap-5 items-start mt-6">
         <div className="bg-gray-50 dark:bg-gray-800 rounded-lg p-6">
           <h2 className="text font-semibold">ITEMS</h2>
