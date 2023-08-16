@@ -26,7 +26,7 @@ export const Pagination = ({
       <p className="font-semibold text-sm">
         Total orders: { count }
       </p>
-      { totalPages !== 1
+      { (totalPages !== 1 && totalPages > 0)
         &&
         <ul className="flex items-center gap-3">
           <li onClick={ onPrevious } className={ `cursor-pointer ${ currentPage !== 1 ? '' : 'invisible' }` }>

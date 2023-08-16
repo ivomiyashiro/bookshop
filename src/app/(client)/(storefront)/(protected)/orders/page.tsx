@@ -62,6 +62,10 @@ export default async function Orders({ searchParams }: {
               )) }
             </TableBody>
           </Table>
+          { orders.length === 0 && (
+            <div className="my-20">
+              <p className="text-2xl text-center italic text-gray-400">Oops! We could not find any orders yet!</p>
+            </div> )}
           <Pagination
             name="Orders"
             count={ pagination.totalCount }
