@@ -1,3 +1,5 @@
+import { OrderStatus } from './orders.interface';
+
 export interface GetStorefrontBooksParams {
   limit?: number;
   page?: number;
@@ -18,8 +20,6 @@ export interface GetStorefrontOrdersParams {
   price?: string;
   status?: OrderStatus;
 }
-
-export type OrderStatus = 'PENDING' | 'PAID' | 'CANCELLED';
 
 export type BooksOrderBy = 'title' | 'createdAt' | 'price';
 
