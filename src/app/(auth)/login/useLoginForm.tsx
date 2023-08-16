@@ -43,7 +43,7 @@ export const useLoginForm = () => {
       const at = Cookies.get('ACCESS_TOKEN') as string;
 
       if (!!!params.get('checkout')) {
-        return router.refresh();
+        return router.push('/');
       }
 
       const { url } = await createPayment(cart, at);

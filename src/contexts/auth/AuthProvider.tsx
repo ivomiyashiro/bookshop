@@ -3,7 +3,6 @@ import { useReducer, useEffect } from 'react';
 import { useRouter, useSearchParams } from 'next/navigation';
 import Cookies from 'js-cookie';
 
-import { User } from '@/interfaces';
 import { checkRefreshToken, loginWithCredentials, logoutUser, signupWithCredentials } from '@/services';
 
 import { AuthContext, authReducer } from './';
@@ -24,10 +23,12 @@ const AuthProvider = ({ children }: { children: React.ReactNode }) => {
     const checkRefreshTokenInCookies = async () => {
       try {
         const { data } = await checkRefreshToken(rt);
-        const { tokens, user } = data;
   
         if (data) {
-          saveTokensAndLogin(user, tokens);
+          dispatch({
+            type: '[AUTH] - Login',
+            payload: data.user
+          });
         }
       } catch (error) {
         removeTokensAndLogout();
@@ -56,6 +57,25 @@ const AuthProvider = ({ children }: { children: React.ReactNode }) => {
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
+
+  useEffect(() => {
+    const rt = Cookies.get('REFRESH_TOKEN') as string;
+
+    const renewInterval = setInterval(async () => {  
+      try {
+        await checkRefreshToken(rt);
+
+      } catch (error) {
+        removeTokensAndLogout();
+
+      }
+    }, 10 * 1000); // Renew every 60 seconds
+  
+    return () => {
+      clearInterval(renewInterval);
+    };
+  }, [state.user]);
+
   
   // Check if after login needs to go to checkout page
   useEffect(() => {
@@ -75,9 +95,12 @@ const AuthProvider = ({ children }: { children: React.ReactNode }) => {
 
   const login = async ({ email, password }: { email: string; password: string }) => {
     try {
-      const { user, tokens } = await loginWithCredentials({ email, password });
+      const { user } = await loginWithCredentials({ email, password });
 
-      saveTokensAndLogin(user, tokens);
+      dispatch({
+        type: '[AUTH] - Login',
+        payload: user
+      });
 
       return user;
 
@@ -120,23 +143,6 @@ const AuthProvider = ({ children }: { children: React.ReactNode }) => {
       removeTokensAndLogout();
       router.refresh();
     }
-  };
-
-
-  const saveTokensAndLogin = (
-    user: User,
-    tokens: { 
-      refresh_token: string; 
-      access_token: string; 
-    }, 
-  ) => {
-    Cookies.set('REFRESH_TOKEN', tokens.refresh_token);
-    Cookies.set('ACCESS_TOKEN', tokens.access_token);
-
-    dispatch({
-      type: '[AUTH] - Login',
-      payload: user
-    });
   };
 
   

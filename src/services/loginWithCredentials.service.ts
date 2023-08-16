@@ -26,6 +26,8 @@ export const loginWithCredentials = async ({ email, password }: Props): Promise<
     const { data } = await axios.post<ApiLoginResponse>(`${BASE_API_URL}/auth/local/login`, {
       email,
       password
+    }, {
+      withCredentials: true
     });
 
     return { 

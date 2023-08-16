@@ -6,17 +6,18 @@ import { AuthContext } from '@/contexts/auth';
 
 import { Spinner } from '@/components';
 
-const AuthContainer = ({ children }: { children: React.ReactNode }) => {
+export const AuthContainer = ({ children }: { children: React.ReactNode }) => {
   const { user, loading, checkout } = useContext(AuthContext);
   const router = useRouter();
 
   if (loading) {
     return (
-      <div className="flex items-center justify-center h-screen">
+      <div className="flex items-center justify-center w-full h-screen">
         <Spinner width="w-20"/> 
       </div>
     );
-  } 
+  }
+  
   // if no checkout in params return to homepage
   if (user && !checkout) {
     router.push('/'); 
@@ -25,5 +26,3 @@ const AuthContainer = ({ children }: { children: React.ReactNode }) => {
 
   return <> { children } </>;
 };
-
-export default AuthContainer;

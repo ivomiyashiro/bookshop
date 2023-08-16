@@ -12,7 +12,6 @@ export { default as ProductCardSkeleton } from './ProductCardSkeleton';
 export { default as DefaultImage } from './DefaultImage';
 export { default as Breadcrumbs } from './Breadcrumbs';
 export { default as Input } from './Input';
-export { default as AuthContainer } from './AuthContainer';
 export * from './Table';
 export { default as Checkbox } from './Checkbox';
 export { default as Chip } from './Chip';

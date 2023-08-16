@@ -1,7 +1,5 @@
-import { cookies } from 'next/headers';
 import { Inter } from 'next/font/google';
 
-import { CartProvider } from '@/contexts/cart';
 import { AuthProvider } from '@/contexts/auth';
 
 import './globals.css';
@@ -13,23 +11,12 @@ export default function RootLayout({
 }: {
   children: React.ReactNode
 }) {
-  let initialCart = [];
-
-  const cookieStore = cookies();
-  const cart = cookieStore.get('CART');
-
-  if (cart) {
-    initialCart = JSON.parse(cart.value);
-  }
-
   return (
     <html lang="en">
       <body className={ inter.className }>
-        <CartProvider initialCart={ initialCart }>
-          <AuthProvider>
-            { children }
-          </AuthProvider>
-        </CartProvider>
+        <AuthProvider>
+          { children }
+        </AuthProvider>
       </body>
     </html>
   );

@@ -19,7 +19,8 @@ export const checkRefreshToken = async (refreshToken: string) => {
     const { data } = await axios.post<Response>(`${BASE_API_URL}/auth/refresh`, null, {
       headers: {
         Authorization: `Bearer ${refreshToken}`
-      }
+      },
+      withCredentials: true
     });
 
     return { 
