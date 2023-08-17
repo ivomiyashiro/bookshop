@@ -12,7 +12,7 @@ export interface CatalogInitState {
     data: { id: number; name: string; checked: boolean }[];
    }[];
   URLParams: URLSearchParams;
-  pagination: Pagination
+  pagination: Pagination;
 }
 
 
