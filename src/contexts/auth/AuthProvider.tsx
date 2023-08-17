@@ -166,8 +166,8 @@ const AuthProvider = ({ children }: { children: React.ReactNode }) => {
 
   
   const removeTokensAndLogout = () => {
-    // Cookies.remove('REFRESH_TOKEN');
-    // Cookies.remove('ACCESS_TOKEN');
+    Cookies.remove('REFRESH_TOKEN');
+    Cookies.remove('ACCESS_TOKEN');
 
     dispatch({ type: '[AUTH] - Signout' });
   };
