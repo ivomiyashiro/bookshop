@@ -2,8 +2,6 @@ import { getBookBySlug } from '@/services';
 import { Breadcrumbs } from '@/components';
 import { Gallery, Information } from './(components)';
 
-export const revalidate = 86400; // 1d
-
 export default async function Book({ params }: {
   params: { slug: string }
 }) {
