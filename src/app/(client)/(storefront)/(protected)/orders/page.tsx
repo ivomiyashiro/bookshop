@@ -16,7 +16,7 @@ import { Breadcrumbs, Table, TableBody, TableHeader, TableRow } from '@/componen
 
 
 export const metadata: Metadata = {
-  title: 'My Orders | Bookshop',
+  title: 'My Orders | No-Bugs Book',
   description: 'Here you will find your list of orders.',
 };
 

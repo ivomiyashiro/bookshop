@@ -1,7 +1,7 @@
 import type { Metadata } from 'next';
 
 export const metadata: Metadata = {
-  title: 'Signup | Bookshop'
+  title: 'Signup | No-Bugs Book'
 };
 
 export default function SignupLayout({

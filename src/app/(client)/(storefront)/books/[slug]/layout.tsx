@@ -10,7 +10,7 @@ export async function generateMetadata({ params }: {
   return {
     title: {
       default: 'Book title',
-      absolute: book.title + ' | Bookshop'
+      absolute: book.title + ' | No-Bugs Book'
     },
     description: book.description,
   };

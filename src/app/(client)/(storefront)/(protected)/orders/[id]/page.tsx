@@ -15,7 +15,7 @@ export async function generateMetadata({ params }: {
   return {
     title: {
       default: '',
-      absolute: `Order #${ id }` + ' | Bookshop'
+      absolute: `Order #${ id }` + ' | No-Bugs Book'
     },
     description: `Here you will details of your order #${ id }.`,
   };

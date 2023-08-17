@@ -4,7 +4,7 @@ import { BookOpenIcon } from '@heroicons/react/24/solid';
 import { Button, GithubLogo } from '@/components';
 
 export const metadata: Metadata = {
-  title: 'Home | Bookshop',
+  title: 'Home | No-Bugs Books',
   description: 'Here you will find our list of books.',
 };
 
@@ -12,8 +12,11 @@ export default async function Home() {
   return (
     <div className="flex flex-col items-center md:items-start text-center md:text-left py-24 ld:py-32">
       <h1 className="text-6xl lg:text-7xl font-bold max-w-[750px]" >
-        WELCOME
-        TO <br /> <span className="text-gray-400">  NO-BUGS BOOKS! </span>
+        <span className="text-3xl text-gray-400">
+        WELCOME TO 
+        </span>
+        <br /> 
+        <span>NO-BUGS BOOKS! </span>
       </h1>
       <p className="lg:text-lg mt-6 max-w-[700px] text-gray-400">
         Experience a new era of online shopping with us.

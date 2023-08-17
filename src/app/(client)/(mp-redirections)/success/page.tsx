@@ -3,7 +3,7 @@ import { OrderSummary } from './(components)';
 import { Button } from '@/components';
 
 export const metadata: Metadata = {
-  title: 'Thank you for your purchase | Bookshop',
+  title: 'Thank you for your purchase | No-Bugs Book',
   description: 'Thank you for trusting us, here you will find all the details of your purchase.',
 };
 

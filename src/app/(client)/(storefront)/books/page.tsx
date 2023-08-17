@@ -11,7 +11,7 @@ import { Catalog, CatalogHeader } from './(components)';
 import { Breadcrumbs, Button } from '@/components';
 
 export const metadata: Metadata = {
-  title: 'Our Catalog | Bookshop',
+  title: 'Our Catalog | No-Bugs Book',
   description: 'Here you will find our list of books available.',
 };
 
