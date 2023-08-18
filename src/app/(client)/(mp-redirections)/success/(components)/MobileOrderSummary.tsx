@@ -10,7 +10,7 @@ const MobileOrderSummary = ({ open, handleOpen }: Props) => {
   return (
     <>
       <div className="py-3 flex justify-center border-b border-gray-500 lg:hidden">
-        <MainLogo size={ 40 } isLink />
+        <MainLogo isLink />
       </div>
       <button className={ `w-full lg:hidden flex justify-between p-4 py-3  ${open ? 'border-b border-gray-500' : ''}` } onClick={ () => handleOpen(prev => !prev) }>
         <div className="flex items-center gap-3"> 

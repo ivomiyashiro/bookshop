@@ -8,7 +8,7 @@ export const metadata: Metadata = {
 
 export default async function Home() {
   return (
-    <div className="flex flex-col py-24 md:justify-center md:text-center ld:py-32">
+    <div className="flex flex-col py-20 md:justify-center md:text-center ld:py-32">
       <h1 className="text-4xl md:text-5xl lg:text-6xl font-extrabold xl:px-36 tracking-tight !leading-tight" >
         Unlocking Code Mastery: Your Hub for Programming Books
       </h1>
