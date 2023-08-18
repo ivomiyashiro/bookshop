@@ -6,7 +6,7 @@ interface Props {
 
 const TableHead = ({ children, className }: Props) => {
   return (
-    <thead className="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
+    <thead className={ `text-xs text-gray-700 uppercase bg-gray-100 dark:bg-gray-700 dark:text-gray-400 ${ className }` }>
       { children }
     </thead>
   );

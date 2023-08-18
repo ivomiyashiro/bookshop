@@ -43,7 +43,7 @@ const CartMenu = ({ open, handleOpen }: Props) => {
 
   return (
     <Modal open={ open } handleOpen={ () => handleOpen(false) }>
-      <aside className={ `fixed top-0 w-full md:w-[470px] right-0 h-screen bg-gray-900 shadow-[0_35px_60px_-15px_rgba(0,0,0,.5)] z-50 md:rounded-l-2xl transition-all overflow-hidden ${ open ? 'translate-x-0' : 'translate-x-[100%]' }` }>
+      <aside className={ `fixed top-0 w-full md:w-[470px] right-0 h-screen bg-white dark:bg-gray-900 shadow-[0_35px_60px_-15px_rgba(0,0,0,.5)] z-50 md:rounded-l-2xl transition-all overflow-hidden ${ open ? 'translate-x-0' : 'translate-x-[100%]' }` }>
         <div className="flex flex-col h-full relative">
           <div className="p-4 shadow flex items-center justify-between">
             <h2 className="font-bold text-3xl">YOUR CART</h2>
@@ -91,16 +91,15 @@ const CartMenu = ({ open, handleOpen }: Props) => {
               </Button>
             </div> )
             : ( <div className="grid place-content-center h-full text-center">
-              <p className="font-bold mb-5 text-2xl">YOUR CART IS EMPTY!</p>
-              <p className="mb-5 text-gray-400">There are no products in your bag.</p>
+              <p className="font-bold mb-6 text-2xl">YOUR CART IS EMPTY!</p>
               <div className="" onClick={ () => handleOpen(false) }>
                 <Button 
                   style="PRIMARY"
                   type="link"
-                  href="/" 
-                  className="w-[180px] mx-auto"
+                  href="/books" 
+                  className="w-[180px] h-[40px] mx-auto !text-[1em]"
                 >
-                    SHOP PRODUCTS
+                  Shop Books
                 </Button>
               </div>
             </div> ) }

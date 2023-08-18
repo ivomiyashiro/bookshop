@@ -11,7 +11,7 @@ export const BodyRow = ({ order }: Props) => {
   return (
     <TableRow key={ order.id } className="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
       <TableCell>
-        <Link href={ `/orders/${ order.id }` } className="font-bold text-gray-300 hover:underline">
+        <Link href={ `/orders/${ order.id }` } className="font-bold text-gray-900 dark:text-gray-300 hover:underline">
           # { order.id }
         </Link>
       </TableCell>
@@ -41,7 +41,7 @@ export const BodyRow = ({ order }: Props) => {
             href={ `/orders/${ order.id }` }
             width="w-[110px]"
             height="h-[30px]"
-            className="!rounded"
+            className="!rounded !text-gray-500 dark:!text-gray-400"
           >
             See Details
           </Button>

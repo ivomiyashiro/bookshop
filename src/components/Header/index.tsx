@@ -1,9 +1,10 @@
 'use client';
 import { useContext, useState } from 'react';
-import { ShoppingBagIcon, UserIcon, MagnifyingGlassIcon } from '@heroicons/react/24/outline';
+import { ShoppingBagIcon, UserIcon, SunIcon, MoonIcon } from '@heroicons/react/24/outline';
 
 import { CartContext } from '@/contexts/cart';
 import { AuthContext } from '@/contexts/auth';
+import { ThemeContext } from '@/contexts/theme';
 
 import { MainLogo, Button, Spinner } from '@/components';
 import { MobileSearchbar, CartMenu, UserMenu } from './components';
@@ -11,25 +12,29 @@ import { MobileSearchbar, CartMenu, UserMenu } from './components';
 const Header = () => {
   const { totalProducts } = useContext(CartContext);
   const { user, loading } = useContext(AuthContext);
+  const { theme, toggleTheme } = useContext(ThemeContext);
+
   const [searchbarOpen, setSearchbarOpen] = useState(false);
   const [cartMenuOpen, setCartMenuOpen] = useState(false);
 
   return (
-    <header className="relative z-50 w-full h-[62px] flex items-center shadow-[inset_0_-1px_0_0_hsla(0,0%,100%,.1)]">
+    <header className="relative z-50 w-full h-[62px] flex items-center border-b border-gray-200 dark:border-gray-600">
       <div className="px-4 lg:px-6 flex items-center justify-between w-full">
         <div>
-          <MainLogo size={ 36 } isLink />
+          <MainLogo size={ 32 } isLink />
         </div>
         <div>
           <ul className="flex gap-3">
-            <li className="flex items-center md:hidden">
+            <li>
               <Button 
                 width="w-[36px]" 
                 height="h-[36px]" 
                 style="ALT" 
-                onClick={ () => setSearchbarOpen(true) }
+                onClick={ toggleTheme }
               >
-                <MagnifyingGlassIcon width={ 22 } height={ 22 } aria-label="Open search menu" />
+                { theme === 'dark' 
+                  ? <SunIcon width={ 22 } height={ 22 }  arial-aria-label="Change to light theme" />
+                  : <MoonIcon width={ 22 } height={ 22 } arial-aria-label="Change to dark theme" /> }
               </Button>
             </li>
             <li className="flex items-center relative">

@@ -33,9 +33,9 @@ export const CartItem = ({ book, handleCloseModal }: Props) => {
       </Link> 
       <div className="flex-[1_1] flex flex-col gap-1 w-full">
         <Link href={ `/books/${ book.slug }` } onClick={ handleCloseModal }>
-          <p>{ book.title }</p>
+          <p className="font-semibold">{ book.title }</p>
         </Link>
-        <p className="text-gray-400 text-sm my-1">
+        <p className="text-gray-500 dark:text-gray-400 text-sm my-1">
           { book.authors.map((author) => (
             <span key={ author.id } className="after:content-['·'] after:last:content-['']"> { author.name } </span>
           )) }

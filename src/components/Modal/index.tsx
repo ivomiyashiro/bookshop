@@ -22,7 +22,7 @@ const Modal = ({ children, open, className, handleOpen }: Props) => {
     <div 
       id={ id } 
       tabIndex={ -1 } 
-      className={ `fixed top-0 left-0 right-0 z-50 w-full p-4 overflow-x-hidden overflow-y-auto md:inset-0 h-screen max-h-full bg-gray-alpha-500 ${ open ? 'block' : 'hidden' } ${ className }` }
+      className={ `fixed top-0 left-0 right-0 z-50 w-full p-4 overflow-x-hidden overflow-y-auto md:inset-0 h-screen max-h-full bg-[rgba(0,0,0,.5)] dark:bg-gray-alpha-500 ${ open ? 'block' : 'hidden' } ${ className }` }
       ref={ modalRef }
       onClick={ handleClick }
     >

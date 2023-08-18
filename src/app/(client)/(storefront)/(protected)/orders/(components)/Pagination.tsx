@@ -22,7 +22,7 @@ export const Pagination = ({
   const onPageChange = (page: number) => router.push(`orders?page=${ page }`);
 
   return (
-    <div className="flex items-center text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400 rounded-lg justify-between mt-4 px-4 py-2 h-[42px]">
+    <div className="flex items-center text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400 rounded-lg justify-between mt-6 px-4 py-2 h-[42px] shadow-md">
       <p className="font-semibold text-sm">
         Total orders: { count }
       </p>

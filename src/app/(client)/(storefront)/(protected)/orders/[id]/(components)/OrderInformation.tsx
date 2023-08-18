@@ -10,10 +10,10 @@ interface Props {
 
 export const OrderInformation = ({ id, status, createdAt }: Props) => {
   return (
-    <div className="bg-gray-50 dark:bg-gray-800 rounded-lg p-6">
+    <div className="bg-gray-50 dark:bg-gray-800 rounded-lg p-6 shadow-md">
       <h1 className="font-bold text-lg tracking-wide">ORDER #<span>{ id }</span></h1>
       <div className="mt-4">
-        <h2 className="text font-semibold mb-1 text-gray-400 text-sm">STATUS</h2>
+        <h2 className="text font-semibold mb-1 text-gray-400 dark:text-gray-300 text-sm">Status</h2>
         <Chip color={ status === 'PAID' ? 'GREEN' : 'RED' }>
           <span className="capitalize">
             { status.toLocaleLowerCase() }
@@ -21,7 +21,7 @@ export const OrderInformation = ({ id, status, createdAt }: Props) => {
         </Chip>
       </div>
       <div className="mt-4">
-        <h2 className="text font-semibold mb-1 text-gray-400 text-sm">CREATED AT</h2>
+        <h2 className="text font-semibold mb-1 text-gray-400 dark:text-gray-300 text-sm">Created At</h2>
         <span className="capitalize text-sm">
           { transformDate(createdAt.toString()) }
         </span>

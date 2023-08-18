@@ -33,11 +33,10 @@ const Information = ({ book }: Props) => {
   return (
     <div className="md:w-full">
       <h1 className="text-2xl md:text-3xl lg:text-4xl font-bold !leading-[1.35em]">{ book.title }</h1>
-      <p className="text-sm mt-2 text-gray-400">
-        By: 
-        { book.authors.map(author => (
-          <span key={ author.id } className="after:content-[','] after:last:content-['']"> { author.name } </span>
-        ))}
+      <p className="text-sm mt-2 text-gray-500 dark:text-gray-400">
+        { book.authors.map((author) => (
+          <span key={ author.id } className="after:content-['·'] after:last:content-['']"> { author.name } </span>
+        )) }
       </p>
       <div className="my-8 h-9">
         { loading || (price === undefined)
@@ -81,7 +80,7 @@ const Information = ({ book }: Props) => {
       </div>
       <div>
         <p className="font-bold mb-2 ">About this book</p>
-        <p className="text-gray-400">{ book.description }</p>
+        <p className="text-gray-500 dark:text-gray-400">{ book.description }</p>
       </div>
     </div>
   );
