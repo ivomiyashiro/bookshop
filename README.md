@@ -2,6 +2,14 @@
 
 A robust and high quality book e-commerce. Developed with Next.js, a powerful and scalable React.js framework and meticulously tested with Jest, ensuring the highest level of code quality and reliability.
 
+
+## 📚 How to use the app
+
+To access all the app's features, I recommend signing up for an account. Alternatively, you can use the following user.
+
+- Email: user@customer.com
+- Password: testing
+
 ## 😁 Crafted with
 
 ✅ Next.js
