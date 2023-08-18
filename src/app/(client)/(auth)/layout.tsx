@@ -25,7 +25,7 @@ export default async function AuthLayout({
         <AuthContainer>
           <div className="w-[375px]">
             <div className="flex flex-col items-center justify-center gap-4">
-              <MainLogo size={ 50 } isLink />
+              <MainLogo isLink />
             </div>
             <NavButtons />
             { children }

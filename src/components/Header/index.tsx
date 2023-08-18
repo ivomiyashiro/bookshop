@@ -6,7 +6,7 @@ import { CartContext } from '@/contexts/cart';
 import { AuthContext } from '@/contexts/auth';
 import { ThemeContext } from '@/contexts/theme';
 
-import { MainLogo, Button, Spinner } from '@/components';
+import { MainLogo, Button, Spinner, Chip } from '@/components';
 import { MobileSearchbar, CartMenu, UserMenu } from './components';
 
 const Header = () => {
@@ -18,10 +18,22 @@ const Header = () => {
   const [cartMenuOpen, setCartMenuOpen] = useState(false);
 
   return (
-    <header className="relative z-50 w-full h-[62px] flex items-center border-b border-gray-200 dark:border-gray-600">
-      <div className="px-4 lg:px-6 flex items-center justify-between w-full">
+    <header className="relative z-50 w-full flex flex-col items-center border-b border-gray-200 dark:border-gray-600">
+      <div className="bg-gray-50 dark:bg-gray-600 w-full py-2 flex items-baseline justify-center gap-1 px-4">
+        <Chip color="PINK" className="!text-xs py-1 hidden md:block">
+          Info
+        </Chip>
+        <p className="text-sm">
+          This project is only for academic purposes. You can checkout the docs in my <a           
+            href="https://github.com/ivomiyashiro/bookshop" 
+            target="_blank"
+            className="text-pink-600 dark:text-pink-400 hover:underline"
+          >Github. </a>
+        </p>
+      </div>
+      <div className="px-4 lg:px-6 flex items-center justify-between w-full py-2 border-t border-gray-200 dark:border-gray-600">
         <div>
-          <MainLogo size={ 32 } isLink />
+          <MainLogo isLink />
         </div>
         <div>
           <ul className="flex gap-3">

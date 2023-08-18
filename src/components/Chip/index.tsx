@@ -1,7 +1,7 @@
 
 interface Props {
   children: React.ReactNode;
-  color: 'GREEN' | 'RED';
+  color: 'GREEN' | 'RED' | 'PINK';
   className?: string;
 }
 
@@ -19,6 +19,14 @@ const Chip = ({ children, color, className }: Props) => {
   if (color === 'RED') {
     return (
       <span className={ `bg-red-100 text-red-800 dark:bg-red-900 dark:text-red-300 ${ communStyles }` }>
+        { children }
+      </span>
+    );
+  }
+
+  if (color === 'PINK') {
+    return (
+      <span className={ `bg-pink-100 text-pink-600 dark:bg-pink-600 dark:text-pink-100 ${ communStyles }` }>
         { children }
       </span>
     );
