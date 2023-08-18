@@ -19,16 +19,16 @@ const Header = () => {
 
   return (
     <header className="relative z-50 w-full flex flex-col items-center border-b border-gray-200 dark:border-gray-600">
-      <div className="bg-gray-50 dark:bg-gray-600 w-full py-2 flex items-baseline justify-center gap-1 px-4">
+      <div className="bg-gray-50 dark:bg-gray-600 w-full py-1.5 h-[36px] flex items-baseline justify-center gap-1 px-4">
         <Chip color="PINK" className="!text-xs py-1 hidden md:block">
           Info
         </Chip>
         <p className="text-sm">
-          This project is only for academic purposes. You can checkout the docs in my <a           
+          This project is only for academic purposes. Checkout the  <a           
             href="https://github.com/ivomiyashiro/bookshop" 
             target="_blank"
-            className="text-pink-600 dark:text-pink-400 hover:underline"
-          >Github. </a>
+            className="text-pink-600 dark:text-pink-500 dark:font-semibold hover:underline"
+          >Docs. </a>
         </p>
       </div>
       <div className="px-4 lg:px-6 flex items-center justify-between w-full py-2 border-t border-gray-200 dark:border-gray-600">
