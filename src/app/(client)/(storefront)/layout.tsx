@@ -1,4 +1,10 @@
+import { Metadata } from 'next';
 import { Header, Footer } from '@/components';
+
+export const metadata: Metadata = {
+  title: 'Home | No-Bugs Books',
+  description: 'Here you will find our list of books.',
+};
 
 export default function StorefrontLayout({
   children,

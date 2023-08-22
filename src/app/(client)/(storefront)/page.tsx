@@ -1,15 +1,9 @@
-import { Metadata } from 'next';
 import { Button, GithubLogo } from '@/components';
 
-export const metadata: Metadata = {
-  title: 'Home | No-Bugs Books',
-  description: 'Here you will find our list of books.',
-};
-
-export default async function Home() {
+export default function Home() {
   return (
     <div className="flex flex-col py-20 md:justify-center md:text-center ld:py-32">
-      <h1 className="text-4xl md:text-5xl lg:text-6xl font-extrabold xl:px-36 tracking-tight !leading-tight" >
+      <h1 role="heading" className="text-4xl md:text-5xl lg:text-6xl font-extrabold xl:px-36 tracking-tight !leading-tight" >
         Unlocking Code Mastery: Your Hub for Programming Books
       </h1>
       <p className="lg:text-lg mt-6 text-gray-500 dark:text-gray-400 xl:px-36">
@@ -32,7 +26,7 @@ export default async function Home() {
           className="flex gap-2 px-8 w-full py-3 lg:py-4 md:w-auto items-center justify-center text-sm font-medium text-gray-900 focus:outline-none bg-white rounded-lg border border-gray-200 hover:bg-gray-100 hover:text-pink-700 focus:z-10 focus:ring-4 focus:ring-gray-200 dark:focus:ring-gray-600 dark:bg-gray-800 dark:text-gray-400 dark:border-gray-600 dark:hover:text-white dark:hover:bg-gray-700 cursor-pointer transition disabled:bg-pink-200 disabled:text-gray-400 disabled:hover:bg-gray-100 disabled:cursor-not-allowed"
         >
           <GithubLogo width={ 18 } />
-          <span className="md:text-[1.15em]">Explore the Docs</span>
+          <span className="md:text-[1.15em]">Explore Docs</span>
         </a>
       </div>
     </div>
