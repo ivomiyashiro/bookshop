@@ -3,28 +3,19 @@ import { useEffect, useState } from 'react';
 import { ThemeContext } from './';
 
 const ThemeProvider = ({ children }: { children: React.ReactNode }) => {
-  const [theme, setTheme] = useState<'dark' | 'light'>(
-    () => {
-      if (typeof window !== 'undefined') {
-        return window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
-      }
+  const [theme, setTheme] = useState<'dark' | 'light'>(checkTheme);
 
-      return 'dark';
-    }
-  );
-
-  const colorTheme = theme === 'dark' ? 'light' : 'dark';
+  const themeToRemove = theme === 'dark' ? 'light' : 'dark';
 
   useEffect(() => {
-    if (typeof window !== 'undefined') {
-      const root = window.document.documentElement;
+    const root = window.document.documentElement;
 
-      root.classList.remove(colorTheme);
-      root.classList.add(theme);
+    root.classList.remove(themeToRemove);
+    root.classList.add(theme);
   
-      localStorage.setItem('theme', theme);
-    }
-  }, [theme, colorTheme]);
+    localStorage.setItem('theme', theme);
+
+  }, [theme, themeToRemove]);
 
   const toggleTheme = () => setTheme(prev => {
     if (prev === 'dark') return 'light';
@@ -41,6 +32,20 @@ const ThemeProvider = ({ children }: { children: React.ReactNode }) => {
       { children }
     </ThemeContext.Provider>
   );
+};
+
+const checkTheme =() => {
+  const localStorageTheme = localStorage.getItem('theme');
+
+  if (!localStorageTheme) {
+    return window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+  }
+
+  if (localStorageTheme === 'dark') {
+    return 'dark';
+  } 
+
+  return 'light';
 };
 
 export default ThemeProvider;
