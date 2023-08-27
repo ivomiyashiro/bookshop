@@ -1,4 +1,5 @@
 import type { Metadata } from 'next';
+import Image from 'next/image';
 
 import { NavButtons, AuthContainer } from './(components)';
 import { MainLogo } from '@/components';
@@ -14,12 +15,16 @@ export default async function AuthLayout({
 }) {
   return (
     <main className="flex justify-center h-screen">
-      <section 
-        className="w-[85%] hidden lg:flex h-full bg-gray-700 bg-cover bg-center items-center lg:p-[2em] xl:p-[4em]" 
-        style={ {
-          backgroundImage: 'url(\'https://images.unsplash.com/photo-1580537659466-0a9bfa916a54?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=774&q=80\')'
-        } }
-      >
+      <section className="relative w-[85%] hidden lg:flex h-full bg-gray-200 dark:bg-gray-700 bg-cover bg-center items-center lg:p-[2em] xl:p-[4em]" >
+        <Image 
+          src="/library.webp"
+          alt="Library"
+          sizes="(min-width: 1024px) 25vw, (min-width: 768px) 33vw, (min-width: 300px) 50vw"
+          style={ {
+            objectFit: 'cover'
+          } }
+          fill
+        />
       </section>
       <section className="w-full pt-[5rem] px-4 lg:pt-[7rem] flex justify-center">
         <AuthContainer>
