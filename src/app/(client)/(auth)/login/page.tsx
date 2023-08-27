@@ -47,14 +47,14 @@ export default function Login() {
             ? <Spinner width="w-6" />
             : 'Log in' }
         </Button>
-        {/* <Button
+        <Button
           type="link"
           style="ALT"
           height="h-[42px]"
           href={ `${BASE_API_URL}/auth/provider/google/callback` }
         >
           Log in with Google
-        </Button> */}
+        </Button>
       </div>
     </form>
   );
