@@ -2,4 +2,6 @@
 import { createContext } from 'react';
 import { ContextProps } from './types';
 
-export const CartContext = createContext({} as ContextProps);
+const CartContext = createContext({} as ContextProps);
+
+export default CartContext;

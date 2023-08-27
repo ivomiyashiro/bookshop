@@ -4,10 +4,9 @@ import Cookies from 'js-cookie';
 
 import { CartItem } from './types';
 
-import { CartContext } from './CartContext';
-import { cartReducer } from './cartReducer';
+import { CartContext, cartReducer } from './';
 
-export const CartProvider = ({ children, initialCart }: { children: React.ReactNode, initialCart: CartItem[] }) => {
+const CartProvider = ({ children, initialCart }: { children: React.ReactNode, initialCart: CartItem[] }) => {
   const [state, dispatch] = useReducer(cartReducer, { 
     cart: initialCart,
     totalProducts: 0,
@@ -100,3 +99,5 @@ export const CartProvider = ({ children, initialCart }: { children: React.ReactN
     </CartContext.Provider>
   );
 };
+
+export default CartProvider;

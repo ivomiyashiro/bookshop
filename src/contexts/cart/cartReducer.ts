@@ -1,6 +1,6 @@
 import { CartActionType, CartState } from './types';
 
-export const cartReducer = (state: CartState, action: CartActionType): CartState => {
+const cartReducer = (state: CartState, action: CartActionType): CartState => {
 
   switch (action.type) {
 
@@ -54,3 +54,5 @@ export const cartReducer = (state: CartState, action: CartActionType): CartState
     return state;
   }
 };
+
+export default cartReducer;
