@@ -8,6 +8,8 @@ const ThemeProvider = ({ children }: { children: React.ReactNode }) => {
   const themeToRemove = theme === 'dark' ? 'light' : 'dark';
 
   useEffect(() => {
+    if (typeof window === 'undefined') return;
+
     const root = window.document.documentElement;
 
     root.classList.remove(themeToRemove);
@@ -35,6 +37,10 @@ const ThemeProvider = ({ children }: { children: React.ReactNode }) => {
 };
 
 const checkTheme =() => {
+  if (typeof window === 'undefined') {
+    return 'dark';
+  }
+
   const localStorageTheme = localStorage.getItem('theme');
 
   if (!localStorageTheme) {
