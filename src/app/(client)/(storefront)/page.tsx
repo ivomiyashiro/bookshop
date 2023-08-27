@@ -2,7 +2,7 @@ import { Button, GithubLogo } from '@/components';
 
 export default function Home() {
   return (
-    <section className="flex flex-col py-20 md:justify-center md:text-center lg:py-32 xl:py-44">
+    <section className="flex flex-col py-20 md:justify-center md:text-center lg:py-28">
       <h1 role="heading" className="text-4xl md:text-5xl lg:text-6xl font-extrabold xl:px-36 tracking-tight !leading-tight" >
         Unlocking Code Mastery: Your Hub for Programming Books
       </h1>
