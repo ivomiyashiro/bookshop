@@ -20,7 +20,14 @@ const AuthProvider = ({ children }: { children: React.ReactNode }) => {
 
   // Check if refresh_token is valid and login user
   useEffect(() => {
-    const rt = Cookies.get('REFRESH_TOKEN') as string;
+    let rt = '';
+
+    if (params.get('rt')) {
+      rt = params.get('rt') as string;
+      window.history.replaceState(null, '', '/');
+    } else {
+      rt = Cookies.get('REFRESH_TOKEN') as string;
+    }
 
     const checkRefreshTokenInCookies = async () => {
       try {

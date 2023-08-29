@@ -57,14 +57,14 @@ export default function Signup() {
             ? <Spinner width="w-6" />
             : 'Sign up' }
         </Button>
-        {/* <Button
+        <Button
           type="link"
           style="ALT"
           height="h-[42px]"
           href={ `${BASE_API_URL}/auth/provider/google/callback` }
         >
           Sign up with Google
-        </Button> */}
+        </Button>
       </div>
     </form>
   );
