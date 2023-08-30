@@ -47,7 +47,7 @@ interface Props {
 }
 
 const MenuLink = ({ item, isLink, isCurrentPath }: Props) => {
-  const linkClassName = 'flex justify-center lg:justify-start items-center gap-2 px-4 py-3 lg:min-w-[235px]';
+  const linkClassName = 'flex justify-center lg:justify-start items-center gap-3 px-4 py-3 lg:min-w-[235px]';
 
   return (
     <li className={ `${isCurrentPath ? 'bg-gray-100 dark:bg-gray-700' : 'hover:bg-gray-100 hover:dark:bg-gray-700'} rounded transition` }>
@@ -100,7 +100,7 @@ const AsideMenu = () => {
         </ul>
       </nav>
       <div className={ 'mt-auto ' + 'hover:bg-gray-200 hover:dark:bg-gray-700 rounded transition' }>
-        <button className={ 'cursor-pointer w-full ' + 'flex items-center gap-2 px-4 py-3' } onClick={ logout }>
+        <button className={ 'cursor-pointer w-full ' + 'flex justify-center lg:justify-start items-center gap-3 px-4 py-3' } onClick={ logout }>
           <ArrowLeftOnRectangleIcon width={ 24 } />
           <p className="hidden lg:block">Log out</p> 
         </button>
