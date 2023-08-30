@@ -26,7 +26,7 @@ const UserMenu = () => {
                   </Link>
                 )
                 : (
-                  <Link href="/dashboard" className="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">
+                  <Link href="/dashboard/books" className="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">
                     Dashboard
                   </Link>
                 ) }
