@@ -16,7 +16,7 @@ export default function AdminLayout({
       <div className="flex">
         <AsideMenu />
         <MobileMenu />
-        <main>
+        <main className="max-w-[1240px] md:mx-12 lg:mx-20 2xl:mx-auto w-full pt-5 px-4">
           { children }
         </main>
       </div>
