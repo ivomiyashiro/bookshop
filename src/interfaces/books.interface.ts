@@ -6,6 +6,7 @@ export interface Book {
   slug:        string;
   image:       string;
   stock:       number;
+  status?:     BookStatus;
   createdAt:   Date;
   updatedAt:   Date;
   authors:     Author[];
@@ -23,3 +24,5 @@ export interface Languages {
 }
 
 export type SortValues = 'HIGHER PRICE' | 'LOWER PRICE' | 'A - Z' | 'Z - A' | 'NEWER' | 'OLDER';
+
+export type BookStatus = 'VISIBLE' | 'HIDDEN'

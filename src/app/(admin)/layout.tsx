@@ -1,5 +1,5 @@
 import { Metadata } from 'next';
-import { AsideMenu, MobileMenu, AuthContainer } from './(components)';
+import { AsideMenu, MobileMenu, AdminContainer } from './(components)';
 
 export const metadata: Metadata = {
   title: 'Dashboard | No-Bugs Books',
@@ -12,14 +12,16 @@ export default function AdminLayout({
   children: React.ReactNode
 }) {
   return (
-    <AuthContainer>
-      <div className="flex">
-        <AsideMenu />
-        <MobileMenu />
-        <main className="max-w-[1240px] md:mx-12 lg:mx-20 2xl:mx-auto w-full pt-5 px-4">
+    <AdminContainer>
+      <div className="grid grid-cols-1 lg:grid-cols-[100px,1fr] xl:grid-cols-[270px,1fr]">
+        <div>
+          <AsideMenu />
+          <MobileMenu />
+        </div>
+        <main className="max-w-[1440px] px-4 lg:px-12 xl:px-20 2xl:mx-auto w-full pt-5 ">
           { children }
         </main>
       </div>
-    </AuthContainer>
+    </AdminContainer>
   );
 }

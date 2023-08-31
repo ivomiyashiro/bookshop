@@ -6,7 +6,7 @@ import { AuthContext } from '@/contexts/auth';
 
 import { Spinner } from '@/components';
 
-const AuthContainer = ({ children }: { children: React.ReactNode }) => {
+const AdminContainer = ({ children }: { children: React.ReactNode }) => {
   const { user, loading } = useContext(AuthContext);
   const router = useRouter();
 
@@ -27,4 +27,4 @@ const AuthContainer = ({ children }: { children: React.ReactNode }) => {
   return <> { children } </>;
 };
 
-export default AuthContainer;
+export default AdminContainer;

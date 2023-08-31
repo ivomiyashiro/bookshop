@@ -47,16 +47,16 @@ interface Props {
 }
 
 const MenuLink = ({ item, isLink, isCurrentPath }: Props) => {
-  const linkClassName = 'flex justify-center lg:justify-start items-center gap-3 px-4 py-3 lg:min-w-[235px]';
+  const linkClassName = 'flex justify-center xl:justify-start items-center gap-3 px-4 py-3 xl:min-w-[235px]';
 
   return (
     <li className={ `${isCurrentPath ? 'bg-gray-100 dark:bg-gray-700' : 'hover:bg-gray-100 hover:dark:bg-gray-700'} rounded transition` }>
       { isLink ? (
         <Link href={ item.href } className={ linkClassName }>
           { item.icon }
-          <p className="hidden lg:block">{ item.name }</p>
+          <p className="hidden xl:block">{ item.name }</p>
           { isCurrentPath && (
-            <div className="ml-auto hidden lg:block">
+            <div className="ml-auto hidden xl:block">
               <ChevronRightIcon width={ 16 } />
             </div>
           ) }
@@ -64,7 +64,7 @@ const MenuLink = ({ item, isLink, isCurrentPath }: Props) => {
       ) : (
         <a href={ item.href } target="_blank" className={ linkClassName }>
           { item.icon }
-          <p className="hidden lg:block">{ item.name }</p>
+          <p className="hidden xl:block">{ item.name }</p>
         </a>
       ) }
     </li>
@@ -78,12 +78,12 @@ const AsideMenu = () => {
   const isCurrentPath = (itemName: string) => currentPath === itemName.toLowerCase();
 
   return (
-    <aside className="hidden md:flex min-h-screen flex-col border-r border-gray-200 dark:border-gray-600 p-4">
+    <aside className="hidden fixed lg:flex h-screen xl:w-[270px] flex-col border-r border-gray-200 dark:border-gray-600 p-4">
       <nav>
-        <div className="px-4 py-2 hidden lg:block">
+        <div className="px-4 py-2 hidden xl:block">
           <MainLogo isLink />
         </div>
-        <div className="px-4 py-2 lg:hidden">
+        <div className="px-4 py-2 xl:hidden">
           <Link href="/" className="text-4xl font-bold">
             N<span className="text-pink-600">.</span> 
           </Link>
@@ -100,9 +100,9 @@ const AsideMenu = () => {
         </ul>
       </nav>
       <div className={ 'mt-auto ' + 'hover:bg-gray-200 hover:dark:bg-gray-700 rounded transition' }>
-        <button className={ 'cursor-pointer w-full ' + 'flex justify-center lg:justify-start items-center gap-3 px-4 py-3' } onClick={ logout }>
+        <button className={ 'cursor-pointer w-full ' + 'flex justify-center xl:justify-start items-center gap-3 px-4 py-3' } onClick={ logout }>
           <ArrowLeftOnRectangleIcon width={ 24 } />
-          <p className="hidden lg:block">Log out</p> 
+          <p className="hidden xl:block">Log out</p> 
         </button>
       </div>
     </aside>

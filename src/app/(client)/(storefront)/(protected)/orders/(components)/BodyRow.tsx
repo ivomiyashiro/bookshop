@@ -9,7 +9,7 @@ interface Props { order: Order; }
 
 export const BodyRow = ({ order }: Props) => {
   return (
-    <TableRow key={ order.id } className="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
+    <TableRow className="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
       <TableCell>
         <Link href={ `/orders/${ order.id }` } className="font-bold text-gray-900 dark:text-gray-300 hover:underline">
           # { order.id }

@@ -5,7 +5,7 @@ interface Props {
 
 const DefaultImage = ({ className }: Props) => {
   return (
-    <div className="absolute flex items-center justify-center inset-0">
+    <div className="absolute flex items-center justify-center inset-0 w-full">
       <svg 
         className={ `w-20 h-20 text-gray-300 dark:text-gray-600 ${ className }` } 
         aria-hidden="true" 
