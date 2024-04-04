@@ -7,7 +7,7 @@ const MainLogo = ({ isLink = false }: Props) => {
     return (
       <a href="/">
         <div className="text-4xl font-bold">
-          NBB<span className="text-pink-600">.</span> 
+          <span className="text-pink-600">.</span>dev
         </div>
       </a>
     );
@@ -15,7 +15,7 @@ const MainLogo = ({ isLink = false }: Props) => {
 
   return (
     <div className="text-4xl font-bold">
-      NBB<span className="text-pink-600">.</span> 
+      <span className="text-pink-600">.</span>dev
     </div>
   );
 };
