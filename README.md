@@ -6,7 +6,7 @@ A robust and high quality book e-commerce. Developed with Next.js, a powerful an
 
 ### Auth
 
-To access all the app's features, I recommend signing up for an account. Alternatively, you can use the following user.
+To access all the app's features, I recommend signing up for an account. In order to do that, you can use the following user.
 
 - Email: user@customer.com
 - Password: testing
@@ -43,28 +43,41 @@ To test the payment using Mercado Pago, please log in with the following user.
 ## 🛠 Installation
 
 ```bash
-$ npm install
+# clone repository
+$ git clone https://github.com/ivomiyashiro/bookshop-api.git
+
+# install dependencies
+$ pnpm install
+```
+
+## 💡 The .env file
+
+```
+BASE_API_URL_PROD=
+BASE_API_URL_DEV=
+BASE_URL_DEV=
+BASE_URL_PROD=
 ```
 
 ## 🚀 Running the app
 
 ```bash
 # development
-$ npm run dev
+$ pnpm run dev
 
 # production mode
-$ npm start
+$ pnpm start
 ```
 
 ## 🧪 Test
 
 ```bash
 # unit tests
-$ npm run test
+$ pnpm run test
 
 # e2e tests
-$ npm run test:e2e
+$ pnpm run test:e2e
 
 # test coverage
-$ npm run test:cov
+$ pnpm run test:cov
 ```
