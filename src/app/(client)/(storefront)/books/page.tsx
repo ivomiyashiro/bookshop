@@ -35,37 +35,40 @@ export default async function Books({ searchParams }: {
     sortBy, 
     orderBy 
   };
-
-  const { books, pagination, languages, authors } = await handleAsyncRequests([
-    getStorefrontBooks(params),
-    getBooksLanguages(),
-    getBooksAuthors(),
-  ]);
-
-  return (
-    <CatalogProvider data={ { 
-      books, 
-      params, 
-      pagination, 
-      languages, 
-      authors 
-    } }>
-      <section className="flex justify-between mb-6">
-        <Breadcrumbs items={ [
-          { label: 'Home', link: '/' },
-          { label: 'Books', link: '/books' },
-        ] } />
-        <Link href="/" className="flex md:hidden items-center gap-2">
-          <Button style="ALT" type="button" className="p-1.5 text-gray-400">
-            <ChevronLeftIcon 
-              width={ 14 }
-            />
-          </Button>
-          <span>Go back</span>
-        </Link>
-      </section>
-      <CatalogHeader />
-      <Catalog />
-    </CatalogProvider>
-  );
+  try {
+    const { books, pagination, languages, authors } = await handleAsyncRequests([
+      getStorefrontBooks(params),
+      getBooksLanguages(),
+      getBooksAuthors(),
+    ]);
+  
+    return (
+      <CatalogProvider data={ { 
+        books, 
+        params, 
+        pagination, 
+        languages, 
+        authors 
+      } }>
+        <section className="flex justify-between mb-6">
+          <Breadcrumbs items={ [
+            { label: 'Home', link: '/' },
+            { label: 'Books', link: '/books' },
+          ] } />
+          <Link href="/" className="flex md:hidden items-center gap-2">
+            <Button style="ALT" type="button" className="p-1.5 text-gray-400">
+              <ChevronLeftIcon 
+                width={ 14 }
+              />
+            </Button>
+            <span>Go back</span>
+          </Link>
+        </section>
+        <CatalogHeader />
+        <Catalog />
+      </CatalogProvider>
+    );
+  } catch (error) {
+    console.log(error);
+  }
 }
