@@ -1,0 +1,88 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL_DEV")
+}
+
+model User {
+  id        Int      @id @default(autoincrement())
+  email     String   @unique
+  name      String
+  password  String
+  role      Role     @default(CUSTOMER)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  orders    Order[]
+  refreshToken String?
+}
+
+model Book {
+  id          Int         @id @default(autoincrement())
+  title       String      @unique
+  description String
+  price       Float
+  image       String
+  stock       Int
+  slug        String      @unique
+  status      BookStatus  @default(VISIBLE)
+  createdAt   DateTime    @default(now())
+  updatedAt   DateTime    @updatedAt
+  authors     Author[]
+  languages   Language[]
+  orderItems  OrderItem[]
+}
+
+model Language {
+  id    Int    @id @default(autoincrement())
+  name  String @unique
+  books Book[]
+}
+
+model Author {
+  id    Int    @id @default(autoincrement())
+  name  String @unique
+  books Book[]
+}
+
+model Order {
+  id                Int             @id @default(autoincrement())
+  totalPrice        Float
+  status            OrderStatus     @default(PAID)
+  createdAt         DateTime        @default(now())
+  updatedAt         DateTime        @updatedAt
+  customer          User            @relation(fields: [customerId], references: [id])
+  customerId        Int
+  orderItems        OrderItem[]
+}
+
+model OrderItem {
+  id       Int   @id @default(autoincrement())
+  quantity Int
+  price    Float
+  book     Book  @relation(fields: [bookId], references: [id])
+  bookId   Int
+  order    Order @relation(fields: [orderId], references: [id], onDelete: Cascade, onUpdate: Cascade)
+  orderId  Int
+}
+
+enum Role {
+  CUSTOMER
+  ADMIN
+}
+
+enum OrderStatus {
+  CANCELLED
+  PAID
+  PENDING
+}
+
+enum BookStatus {
+  VISIBLE
+  HIDDEN
+}
